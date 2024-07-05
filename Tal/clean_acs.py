@@ -21,7 +21,7 @@ def get_Multiple_States_2018_All(state_code_list=["AL", "AK", "AZ", "AR", "CA", 
         else:
             state_data = pd.read_csv(state_file_string)
         final_df = pd.concat([final_df, state_data], ignore_index=True)
-    final_df.to_csv(f"2018_all_data.csv", index=False)
+    final_df.to_csv(f"../data/acs/2018_all_data.csv", index=False)
 
 
 def read_ACS_value_data():
@@ -183,6 +183,7 @@ def detect_outliers(df, threshold=8):
             df_cleaned = df.drop(column_outliers)
     return outliers, df_cleaned
 
+from sklearn.model_selection import train_test_split
 
 if __name__ == '__main__':
     get_Multiple_States_2018_All()
@@ -197,8 +198,9 @@ if __name__ == '__main__':
     df_clean['Educational attainment'] = df_clean['Educational attainment'].apply(lambda x: cast_education(x))
     df_clean['Race/Ethnicity'] = df_clean['Race/Ethnicity'].apply(lambda x: cast_race(x))
     df_clean.to_csv("../data/acs/2018_all_data_clean1.csv", index=False)
-    df_clean = pd.read_csv("../data/acs/2018_all_data_clean2.csv")
+    df_clean = pd.read_csv("../data/acs/2018_all_data_clean1.csv")
     outliers, df_clean = detect_outliers(df_clean)
     outliers.to_csv("../data/acs/outliers.csv", index=False)
     df_clean.to_csv("../data/acs/2018_all_data_clean_final.csv", index=False)
+
 
