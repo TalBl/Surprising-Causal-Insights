@@ -11,6 +11,14 @@ def get_df_one_hot_encoding(df_input):
     X_one_hot.reset_index(drop=True, inplace=True)
     return X_one_hot
 
+def KL(a, b):
+    a = np.asarray(a, dtype=np.float)
+    b = np.asarray(b, dtype=np.float)
+    return np.sum(np.where(a != 0, a * np.log(a / b), 0))
+
+
+
+
 
 def get_t_value_bayesian(positives, negatives, index_all_data):
     pos_plus_one = 1 + positives
@@ -125,13 +133,13 @@ class DivergenceExplorer:
                     np.array(self.df_discrete[outcome_name].values) ** 2
                 )
                 df_outcomes[f"{outcome_name}_protected"] = (
-                    np.where(df_discrete['Sex'] == "Woman", df_outcomes[outcome_name], 0)
+                    np.where(df_discrete['Woman_Gender'] == 1, df_outcomes[outcome_name], 0)
                 )
                 df_outcomes.loc[:, f"{outcome_name}_protected_SQUARED"] = (
                         np.array(df_outcomes[f"{outcome_name}_protected"].values) ** 2
                 )
                 df_outcomes.loc[:, f"{outcome_name}_protected_COUNT"] = (
-                    np.where(df_discrete['Sex'] == "Woman", 1, 0)
+                    np.where(df_discrete['Woman_Gender'] == 1, 1, 0)
                 )
         else:
             # We accumulate the outcomes
@@ -328,6 +336,6 @@ class DivergenceExplorer:
         if show_coincise:
             df_divergence = df_divergence.drop(columns=cols_to_drop)
         df_divergence = df_divergence.drop(columns=squared_cols_to_drop)
-        df_divergence = df_divergence.drop(columns=["Total person's income_protected_SQUARED", "Total person's income_protected_COUNT"])
+        df_divergence = df_divergence.drop(columns=["ConvertedCompYearly_protected_SQUARED", "ConvertedCompYearly_protected_COUNT"])
         
         return df_divergence
