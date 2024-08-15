@@ -6,38 +6,30 @@ import itertools
 import ast
 from tqdm import tqdm
 
-PROJECT_DIRECTORY = "so"
+PROJECT_DIRECTORY = "heart"
 K = 5
 LAMDA_VALUES = [0.0001, 0.00005, 0.00009]
-CLEAN_DF_PATH = f"../outputs/{PROJECT_DIRECTORY}/clean_data.csv"
+CLEAN_DF_PATH = f"outputs/{PROJECT_DIRECTORY}/clean_data.csv"
 PROTECTED_COLUMN = "Woman_Gender"
-OUTCOME_COLUMN = "ConvertedCompYearly"
+OUTCOME_COLUMN = "HeartDisease"
 CALCED_INTERSECTIONS = {}
 CLEAN_DF = pd.read_csv(CLEAN_DF_PATH)
 
 def so_syn_dag():
     G = nx.DiGraph()
     G.add_edges_from([
-        ("EdLevel", "ConvertedCompYearly"),
-        ("YearsCodePro", "ConvertedCompYearly"),
-        ("Country", "ConvertedCompYearly"),
-        ("Age", "ConvertedCompYearly"),
-        ("WorkExp", "ConvertedCompYearly"),
-        ("Data scientist or machine learning specialist_DevType", "ConvertedCompYearly"),
-        ("Developer, full-stack_DevType", "ConvertedCompYearly"),
-        ("Engineer, data_DevType", "ConvertedCompYearly"),
-        ("C#_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Go_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Java_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Julia_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Python_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Woman_Gender", "ConvertedCompYearly"),
-        ("Man_Gender", "ConvertedCompYearly"),
-        ("African_Ethnicity", "ConvertedCompYearly"),
-        ("Black_Ethnicity", "ConvertedCompYearly"),
-        ("Asian_Ethnicity", "ConvertedCompYearly"),
-        ("White_Ethnicity", "ConvertedCompYearly"),
-        ("new_treatment", "ConvertedCompYearly")
+        ("Developer, back-end", OUTCOME_COLUMN),
+        ("Woman", OUTCOME_COLUMN),
+        ("Country", OUTCOME_COLUMN),
+        ("Age", OUTCOME_COLUMN),
+        ("MentalHealth", OUTCOME_COLUMN),
+        ("White", OUTCOME_COLUMN),
+        ("Asian", OUTCOME_COLUMN),
+        ("Black", OUTCOME_COLUMN),
+        ("Master’s degree (M.A., M.S., M.Eng., MBA, etc.)", OUTCOME_COLUMN),
+        ("Bachelor’s degree (B.A., B.S., B.Eng., etc.)", OUTCOME_COLUMN),
+        ("Primary/elementary school", OUTCOME_COLUMN),
+        ("new_treatment", OUTCOME_COLUMN)
     ])
     return G
 
@@ -45,17 +37,22 @@ def so_syn_dag():
 DAG_d = so_syn_dag()
 
 
-def calc_cate(df, treatments, values, outcome):
+def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: list):
     filtered_df = df.copy()
+    for d in group:
+        filtered_df = filtered_df[filtered_df[d["att"]] == d['value']]
+    if filtered_df.shape[0] == 0:
+        return None
+    # Initialize the new_treatment column to 1
     filtered_df["new_treatment"] = 1
-    for attribute, desired_value in zip(treatments, values):
+    for attribute, desired_value in zip(att, val):
         filtered_df["new_treatment"] = filtered_df["new_treatment"] & filtered_df[attribute].apply(lambda x: 1 if x == desired_value else 0).astype(int)
 
     model = CausalModel(
         data=filtered_df,
         graph=DAG_d,
         treatment="new_treatment",
-        outcome=outcome)
+        outcome=outcome_column)
     values = list(set(filtered_df["new_treatment"]))
     if len(values) == 1:
         return None,None
@@ -67,24 +64,24 @@ def calc_cate(df, treatments, values, outcome):
                                                 test_significance=True)
 
     p_val = causal_estimate_reg.test_stat_significance()['p_value']
-    if p_val < 0.05:
-        return causal_estimate_reg.value,p_val
+    if p_val < 0.5:
+        return causal_estimate_reg.value, p_val
     return None,None
 
 
-def analyze_relation(data, itemset, treatment_d, size, size_protected, size_treated, support, std, diff_means):
-    protected_population = data[data[PROTECTED_COLUMN] == 1]
-    ate, p_v1 = calc_cate(data, list(treatment_d.keys()), list(treatment_d.values()), OUTCOME_COLUMN)
-    ate_p, p_v2 = calc_cate(protected_population, list(treatment_d.keys()), list(treatment_d.values()), OUTCOME_COLUMN)
-    if ate and ate_p:
-        iscore = (max(ate, ate_p) - min(ate, ate_p))
-        return {'itemset': itemset, 'treatment': treatment_d, 'ate': ate, 'ate_p':ate_p,
-                'iscore': iscore, 'size': size, 'size_protected': size_protected, "size_treated": size_treated, "support": support,
-                "ni_score1": ni_score(iscore, LAMDA_VALUES[0]), "ni_score2": ni_score(iscore, LAMDA_VALUES[1]), "ni_score3": ni_score(iscore, LAMDA_VALUES[2]),
+def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means):
+    ate1, p_v1 = calc_cate(group1, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()))
+    ate2, p_v2 = calc_cate(group2, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()))
+    if ate1 and ate2:
+        iscore = abs(ate1 - ate2)
+        return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
+                'iscore': iscore, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
+                "ni_score": ni_score(iscore, LAMDA_VALUES[2]),
                 "p_v1": p_v1, "p_v2": p_v2, "utility": ni_score(iscore, LAMDA_VALUES[2])*support, "std": std, "diff_means": diff_means}
-    return {'itemset': itemset, 'treatment': treatment_d, 'ate': ate, 'ate_p':ate_p,
-            'iscore': None, 'size': size, 'size_protected': size_protected, "size_treated": size_treated, "support": support,
-            "ni_score1": None, "ni_score2": None, "ni_score3": None, "p_v1": None, "p_v2": None, "utility": None, "std": std, "diff_means": diff_means}
+    return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
+            'iscore': None, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
+            "ni_score": None,
+            "p_v1": p_v1, "p_v2": p_v2, "utility": None, "std": std, "diff_means": diff_means}
 
 
 def ni_score(x, lamda):
@@ -103,12 +100,10 @@ def parse_treatment(input_str):
     # Remove the outer parentheses and strip extra quotes if present
     s = ast.literal_eval(f"{input_str}")
     res_dict = {}
-    keys, values = s
-    keys = list(keys) if type(keys)==tuple else [keys]
-    values = list(values) if type(values) == tuple else [values]
-    for idx in range(len(keys)):
-        value, key = values[idx], keys[idx]
-        res_dict[key] = value
+    if type(s) == dict:
+        s = [s]
+    for d in s:
+        res_dict[d["att"]] = d["value"]
     return res_dict
 
 
@@ -121,7 +116,7 @@ def parse_itemset(itemset):
     return item_set
 
 
-def calc_facts_metrics(data, meta_data):
+def calc_facts_metrics(data, group1, group2, meta_data):
     n = data.shape[0]
     results = []
     for idx, (itemset, treatment) in meta_data.iterrows():
@@ -135,19 +130,25 @@ def calc_facts_metrics(data, meta_data):
         size = population.shape[0]
         support = size / n
         std = np.std(population[OUTCOME_COLUMN])
-        df_protected = population[population[PROTECTED_COLUMN] == 1]
-        size_protected = df_protected.shape[0]
-        diff_means = np.mean(population[OUTCOME_COLUMN]) - np.mean(df_protected[OUTCOME_COLUMN])
+        df_group1 = population.copy()
+        for d in group1:
+            df_group1 = df_group1[df_group1[d["att"]]==d["value"]]
+        df_group2 = population.copy()
+        for d in group2:
+            df_group2 = df_group2[df_group2[d["att"]]==d["value"]]
+        size_group1 = df_group1.shape[0]
+        size_group2 = df_group2.shape[0]
+        diff_means = np.mean(df_group1[OUTCOME_COLUMN]) - np.mean(df_group2[OUTCOME_COLUMN])
         treated = population.copy()
         for key, value in treatments_d.items():
             treated = treated[treated[key] == value]
         if treated.shape[0] == 0:
             return None
-        size_treated = treated.shape[0]
-        r = analyze_relation(population, item_set, treatments_d, size, size_protected, size_treated, support, std, diff_means)
+        r = analyze_relation(population, group1, group2, item_set, treatments_d, size, size_group1, size_group2, support,
+                             std, diff_means)
         if r:
             results.append(r)
-    pd.DataFrame(results).to_csv(f"../outputs/{PROJECT_DIRECTORY}/all_facts.csv", index=False)
+    pd.DataFrame(results).to_csv(f"outputs/{PROJECT_DIRECTORY}/all_facts.csv", index=False)
 
 
 def get_intersection(df_facts, att1, att2):
@@ -209,20 +210,18 @@ def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda):
         group.append(curr_row)
         items.append(curr_row['itemset'])
         scores.append(score_dictionary)
-        print(f"Add row itemset={curr_row['itemset']} treatment={curr_row['treatment']}")
-        print(f" Now score is: {max_score}")
         i += 1
     return group, scores
 
 
 def find_group(df_clean, df_facts):
     df_facts = df_facts.dropna()
-    max_subpopulation = max(df_facts['size'])
+    max_subpopulation = max(df_facts['size_itemset'])
     for lamda in [0.00009]:
         for alpha in [0.5]:
             group, scores = greedy(df_clean, df_facts, max_subpopulation, alpha, lamda)
             df_calc = pd.concat(group, axis=1)
             transposed_df1 = df_calc.T
-            transposed_df1.to_csv(f"../outputs/{PROJECT_DIRECTORY}/find_k/{K}_{alpha}_{lamda}.csv", index=False)
-            pd.DataFrame(scores).to_csv(f"../outputs/{PROJECT_DIRECTORY}/scores/{K}_{alpha}_{lamda}.csv", index=False)
+            transposed_df1.to_csv(f"outputs/{PROJECT_DIRECTORY}/find_k/{K}_{alpha}_{lamda}.csv", index=False)
+            pd.DataFrame(scores).to_csv(f"outputs/{PROJECT_DIRECTORY}/scores/{K}_{alpha}_{lamda}.csv", index=False)
 

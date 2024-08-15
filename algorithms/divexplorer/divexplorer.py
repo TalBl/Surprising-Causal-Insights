@@ -77,6 +77,8 @@ class DivergenceExplorer:
         attributes: list = None,
         FPM_algorithm="fpgrowth",
         show_coincise=True,
+        group_1_column="",
+        group_2_column=""
     ):
         """
         Args:
@@ -111,7 +113,7 @@ class DivergenceExplorer:
             attributes = [
                 attr
                 for attr in list(self.df_discrete.columns)
-                if attr not in boolean_outcomes + quantitative_outcomes
+                if attr not in boolean_outcomes + quantitative_outcomes + [group_2_column,group_1_column]
             ]
 
         # Get only the attributes specified
@@ -119,39 +121,18 @@ class DivergenceExplorer:
 
         len_dataset = len(self.df_discrete)
 
-        if self.is_one_hot_encoding == False:
-            # If it is not already one-hot encoded, we one-hot encode it
-            df_ohe = get_df_one_hot_encoding(df_discrete)
+        # If it is not already one-hot encoded, we one-hot encode it
+        df_ohe = get_df_one_hot_encoding(df_discrete)
 
-        if quantitative_outcomes:
-            # If there are quantitative outcomes, we compute the squared outcome
-            df_outcomes = self.df_discrete[quantitative_outcomes].copy()
-            for outcome_name in quantitative_outcomes:
-                # Compute the squared outcome - we will use it for the divergence computation
-
-                df_outcomes.loc[:, f"{outcome_name}_SQUARED"] = (
-                    np.array(self.df_discrete[outcome_name].values) ** 2
-                )
-                df_outcomes[f"{outcome_name}_protected"] = (
-                    np.where(df_discrete['Woman_Gender'] == 1, df_outcomes[outcome_name], 0)
-                )
-                df_outcomes.loc[:, f"{outcome_name}_protected_SQUARED"] = (
-                        np.array(df_outcomes[f"{outcome_name}_protected"].values) ** 2
-                )
-                df_outcomes.loc[:, f"{outcome_name}_protected_COUNT"] = (
-                    np.where(df_discrete['Woman_Gender'] == 1, 1, 0)
-                )
-        else:
-            # We accumulate the outcomes
-            df_outcomes = pd.DataFrame()
-
-            for boolean_outcome in boolean_outcomes:
-                positive_outcomes = (self.df_discrete[boolean_outcome] == 1).astype(int)
-                negative_outcomes = (self.df_discrete[boolean_outcome] == 0).astype(int)
-                bottom_outcomes = self.df_discrete[boolean_outcome].isna().astype(int)
-                df_outcomes[f"{boolean_outcome}_positive"] = positive_outcomes
-                df_outcomes[f"{boolean_outcome}_negative"] = negative_outcomes
-                df_outcomes[f"{boolean_outcome}_bottom"] = bottom_outcomes
+        # If there are quantitative outcomes, we compute the squared outcome
+        df_outcomes = pd.DataFrame()
+        df_outcomes["OUTCOME"] = self.df_discrete[quantitative_outcomes[0]].copy()
+        df_outcomes["GROUP_1"] = self.df_discrete[group_1_column].copy()
+        df_outcomes[f"GROUP_1_outcome"] = df_outcomes["GROUP_1"] * df_outcomes["OUTCOME"]
+        df_outcomes.loc[:, f"GROUP_2"] = (
+            np.array(self.df_discrete[group_2_column].values)
+        )
+        df_outcomes[f"GROUP_2_outcome"] = df_outcomes["GROUP_2"] * df_outcomes["OUTCOME"]
 
         if FPM_algorithm == "fpgrowth":
             df_divergence = fpgrowth_cm(
@@ -249,93 +230,33 @@ class DivergenceExplorer:
         else:
             for quantitative_outcome in quantitative_outcomes:
                 df_divergence[quantitative_outcome] = (
-                    df_divergence[quantitative_outcome]
+                    df_divergence["OUTCOME"]
                     / (df_divergence["support"] * len_dataset).round()
                 )
 
-                df_divergence[f"{quantitative_outcome}_protected"] = (df_divergence[f"{quantitative_outcome}_protected"]
-                                                                      / (df_divergence[f"{quantitative_outcome}_protected_COUNT"])
+                df_divergence[f"{quantitative_outcome}_group1"] = (df_divergence[f"GROUP_1_outcome"]
+                                                                      / (df_divergence[f"GROUP_1"])
                                                                       .round())
-
-                quantitative_outcome_squared = f"{quantitative_outcome}_SQUARED"
-                squared_cols_to_drop.append(quantitative_outcome_squared)
-
-                # Add the info of the all dataset row
-                for column_name in [
-                    quantitative_outcome,
-                    quantitative_outcome_squared,
-                    f"{quantitative_outcome}_protected", f"{quantitative_outcome}_protected_SQUARED"
-                ]:
-                    all_dataset_row[column_name] = df_outcomes[column_name].sum()
-
-                all_dataset_row[
-                    f"{quantitative_outcome}_div"
-                ] = 0  # The divergence is 0 by definition
-                all_dataset_row[
-                    f"{quantitative_outcome}_t"
-                ] = 0  # The t value is 0 by definition
-
-                # Compute the average of the all dataset row -- as above
-                overall_average = all_dataset_row[quantitative_outcome] / len_dataset
-
-                # Add the average to the all dataset row
-                all_dataset_row[quantitative_outcome] = overall_average
+                df_divergence[f"{quantitative_outcome}_group2"] = (df_divergence[f"GROUP_2_outcome"]
+                                                                   / (df_divergence[f"GROUP_2"])
+                                                                   .round())
 
                 # Compute the divergence
                 df_divergence[f"{quantitative_outcome}_div"] = (
-                    df_divergence[quantitative_outcome] - df_divergence[f"{quantitative_outcome}_protected"]
+                    df_divergence[f"{quantitative_outcome}_group1"] - df_divergence[f"{quantitative_outcome}_group2"]
                 )
-
-                # Compute the t value with Welch's t-test
-                squared_values = df_divergence[quantitative_outcome_squared].values
-                support_count_values = (
-                    df_divergence["support"].values * len_dataset
-                ).round()
-                mean_values = df_divergence[quantitative_outcome].values
-
-                #compute for protected
-                squared_values_p = df_divergence[f"{quantitative_outcome}_protected_SQUARED"].values
-                support_count_values_p = df_divergence[f"{quantitative_outcome}_protected_COUNT"]
-                mean_values_p = df_divergence[f"{quantitative_outcome}_protected"].values
-                squared_values_p = np.concatenate([[all_dataset_row[f"{quantitative_outcome}_protected_SQUARED"]], squared_values_p])
-                support_count_values_p = np.concatenate([[len_dataset], support_count_values_p])
-                mean_values_p = np.concatenate([[all_dataset_row[f"{quantitative_outcome}_protected"]], mean_values_p])
-
-                # We append the pos and neg values of the all dataset row
-                squared_values = np.concatenate(
-                    [[all_dataset_row[quantitative_outcome_squared]], squared_values]
-                )
-                support_count_values = np.concatenate(
-                    [[len_dataset], support_count_values]
-                )
-                mean_values = np.concatenate(
-                    [[all_dataset_row[quantitative_outcome]], mean_values]
-                )
-
-                t = compute_welch_t_test(
-                    squared_values, support_count_values, mean_values, squared_values_p, support_count_values_p, mean_values_p
-                )
-                df_divergence[f"{quantitative_outcome}_t"] = t[
-                    1:
-                ]  # We omit the all dataset row
-
-        # Add the all dataset row
-        df_divergence.loc[
-            len(df_divergence), all_dataset_row.keys()
-        ] = all_dataset_row.values()
 
         df_divergence["length"] = df_divergence["itemset"].str.len()
         df_divergence["support_count"] = (
             df_divergence["support"] * len_dataset
         ).round()
         df_divergence = df_divergence.reset_index(drop=True)
+        df_divergence = df_divergence.drop(["OUTCOME", "GROUP_1_outcome", "GROUP_2_outcome"], axis=1)
 
         df_divergence.sort_values("support", ascending=False, inplace=True)
         df_divergence = df_divergence.reset_index(drop=True)
 
         if show_coincise:
             df_divergence = df_divergence.drop(columns=cols_to_drop)
-        df_divergence = df_divergence.drop(columns=squared_cols_to_drop)
-        df_divergence = df_divergence.drop(columns=["ConvertedCompYearly_protected_SQUARED", "ConvertedCompYearly_protected_COUNT"])
         
         return df_divergence
