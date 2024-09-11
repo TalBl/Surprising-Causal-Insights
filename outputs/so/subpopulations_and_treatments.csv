@@ -1,16 +1,1 @@
-itemset,treatment
-"frozenset({'Gender=Man', 'Asian=0', 'White=1'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Gender=Man', 'Asian=0', 'White=1', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Gender=Man', 'White=1'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Gender=Man', 'White=1', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-frozenset({'Gender=Man'}),"{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Gender=Man', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Asian=0', 'White=1'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Asian=0', 'White=1', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-frozenset({'White=1'}),"{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'White=1', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-frozenset({'Black=0'}),"{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Asian=0', 'Gender=Man'})","{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Asian=0', 'Gender=Man', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
-frozenset({'Asian=0'}),"{'att': 'Developer, back-end', 'value': 1}"
-"frozenset({'Asian=0', 'Black=0'})","{'att': 'Developer, back-end', 'value': 1}"
+

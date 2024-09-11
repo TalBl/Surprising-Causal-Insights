@@ -78,7 +78,8 @@ class DivergenceExplorer:
         FPM_algorithm="fpgrowth",
         show_coincise=True,
         group_1_column="",
-        group_2_column=""
+        group_2_column="",
+        COLUMNS_TO_IGNORE=[]
     ):
         """
         Args:
@@ -123,6 +124,7 @@ class DivergenceExplorer:
 
         # If it is not already one-hot encoded, we one-hot encode it
         df_ohe = get_df_one_hot_encoding(df_discrete)
+        df_ohe = df_ohe.drop(COLUMNS_TO_IGNORE, axis=1)
 
         # If there are quantitative outcomes, we compute the squared outcome
         df_outcomes = pd.DataFrame()

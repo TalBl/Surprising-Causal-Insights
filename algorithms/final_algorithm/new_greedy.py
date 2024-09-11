@@ -6,43 +6,19 @@ import itertools
 import ast
 from tqdm import tqdm
 
-PROJECT_DIRECTORY = "heart"
-K = 5
-LAMDA_VALUES = [0.0001, 0.00005, 0.00009]
-CLEAN_DF_PATH = f"outputs/{PROJECT_DIRECTORY}/clean_data.csv"
+K = 10
+LAMDA_VALUES = [0.0001, 0.00005, 0.9999]
 PROTECTED_COLUMN = "Woman_Gender"
-OUTCOME_COLUMN = "HeartDisease"
 CALCED_INTERSECTIONS = {}
-CLEAN_DF = pd.read_csv(CLEAN_DF_PATH)
-
-def so_syn_dag():
-    G = nx.DiGraph()
-    G.add_edges_from([
-        ("Developer, back-end", OUTCOME_COLUMN),
-        ("Woman", OUTCOME_COLUMN),
-        ("Country", OUTCOME_COLUMN),
-        ("Age", OUTCOME_COLUMN),
-        ("MentalHealth", OUTCOME_COLUMN),
-        ("White", OUTCOME_COLUMN),
-        ("Asian", OUTCOME_COLUMN),
-        ("Black", OUTCOME_COLUMN),
-        ("Master’s degree (M.A., M.S., M.Eng., MBA, etc.)", OUTCOME_COLUMN),
-        ("Bachelor’s degree (B.A., B.S., B.Eng., etc.)", OUTCOME_COLUMN),
-        ("Primary/elementary school", OUTCOME_COLUMN),
-        ("new_treatment", OUTCOME_COLUMN)
-    ])
-    return G
 
 
-DAG_d = so_syn_dag()
-
-
-def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: list):
+def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: list, graph):
     filtered_df = df.copy()
-    for d in group:
-        filtered_df = filtered_df[filtered_df[d["att"]] == d['value']]
+    if len(group) == 1:
+        for d in group:
+            filtered_df = filtered_df[filtered_df[d["att"]] == d['value']]
     if filtered_df.shape[0] == 0:
-        return None
+        return None,None
     # Initialize the new_treatment column to 1
     filtered_df["new_treatment"] = 1
     for attribute, desired_value in zip(att, val):
@@ -50,8 +26,8 @@ def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: lis
 
     model = CausalModel(
         data=filtered_df,
-        graph=DAG_d,
-        treatment="new_treatment",
+        graph=graph,
+        treatment=att[0],
         outcome=outcome_column)
     values = list(set(filtered_df["new_treatment"]))
     if len(values) == 1:
@@ -64,20 +40,20 @@ def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: lis
                                                 test_significance=True)
 
     p_val = causal_estimate_reg.test_stat_significance()['p_value']
-    if p_val < 0.5:
+    if p_val < 0.9:
         return causal_estimate_reg.value, p_val
     return None,None
 
 
-def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means):
-    ate1, p_v1 = calc_cate(group1, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()))
-    ate2, p_v2 = calc_cate(group2, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()))
+def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means, OUTCOME_COLUMN, graph):
+    ate1, p_v1 = calc_cate(group1, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()), graph)
+    ate2, p_v2 = calc_cate(group2, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()), graph)
     if ate1 and ate2:
         iscore = abs(ate1 - ate2)
         return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
                 'iscore': iscore, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
                 "ni_score": ni_score(iscore, LAMDA_VALUES[2]),
-                "p_v1": p_v1, "p_v2": p_v2, "utility": ni_score(iscore, LAMDA_VALUES[2])*support, "std": std, "diff_means": diff_means}
+                "p_v1": p_v1, "p_v2": p_v2, "utility": ni_score(iscore, LAMDA_VALUES[2]), "std": std, "diff_means": diff_means}
     return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
             'iscore': None, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
             "ni_score": None,
@@ -116,7 +92,7 @@ def parse_itemset(itemset):
     return item_set
 
 
-def calc_facts_metrics(data, group1, group2, meta_data):
+def calc_facts_metrics(data, group1, group2, meta_data, OUTCOME_COLUMN, graph):
     n = data.shape[0]
     results = []
     for idx, (itemset, treatment) in meta_data.iterrows():
@@ -131,11 +107,13 @@ def calc_facts_metrics(data, group1, group2, meta_data):
         support = size / n
         std = np.std(population[OUTCOME_COLUMN])
         df_group1 = population.copy()
-        for d in group1:
-            df_group1 = df_group1[df_group1[d["att"]]==d["value"]]
+        if len(group1) == 1:
+            for d in group1:
+                df_group1 = df_group1[df_group1[d["att"]]==d["value"]]
         df_group2 = population.copy()
-        for d in group2:
-            df_group2 = df_group2[df_group2[d["att"]]==d["value"]]
+        if len(group2) == 1:
+            for d in group2:
+                df_group2 = df_group2[df_group2[d["att"]]==d["value"]]
         size_group1 = df_group1.shape[0]
         size_group2 = df_group2.shape[0]
         diff_means = np.mean(df_group1[OUTCOME_COLUMN]) - np.mean(df_group2[OUTCOME_COLUMN])
@@ -145,20 +123,20 @@ def calc_facts_metrics(data, group1, group2, meta_data):
         if treated.shape[0] == 0:
             return None
         r = analyze_relation(population, group1, group2, item_set, treatments_d, size, size_group1, size_group2, support,
-                             std, diff_means)
+                             std, diff_means, OUTCOME_COLUMN, graph)
         if r:
             results.append(r)
-    pd.DataFrame(results).to_csv(f"outputs/{PROJECT_DIRECTORY}/all_facts.csv", index=False)
+    return results
 
 
-def get_intersection(df_facts, att1, att2):
+def get_intersection(df_facts, att1, att2, df_clean):
     if "_".join([att1['itemset'], att2['itemset']]) in CALCED_INTERSECTIONS:
         return CALCED_INTERSECTIONS["_".join([att1['itemset'], att2['itemset']])]
     if "_".join([att2['itemset'], att1['itemset']]) in CALCED_INTERSECTIONS:
         return CALCED_INTERSECTIONS["_".join([att2['itemset'], att1['itemset']])]
     item_set1 = ast.literal_eval(att1['itemset'])
     item_set2 = ast.literal_eval(att2['itemset'])
-    population = CLEAN_DF.copy()
+    population = df_clean.copy()
     for key, value in item_set1.items():
         population = population[population[key] == value]
         if population.shape[0] == 0:
@@ -174,7 +152,7 @@ def get_intersection(df_facts, att1, att2):
     return r
 
 
-def get_score(max_subpopulation, df_facts, group, attribute, alpha, K, lamda):
+def get_score(max_subpopulation, df_facts, group, attribute, alpha, K, lamda, df_clean, OUTCOME_COLUMN):
     intersection = 0
     checked_group = group.copy()
     checked_group.append(attribute)
@@ -182,14 +160,14 @@ def get_score(max_subpopulation, df_facts, group, attribute, alpha, K, lamda):
     utility = utility_sum / len(checked_group)
     if group:
         for pair in itertools.combinations(checked_group, 2):
-            intersection += get_intersection(df_facts, pair[0], pair[1])
+            intersection += get_intersection(df_facts, pair[0], pair[1], df_clean)
     f_intersection = ((max_subpopulation*len(checked_group)*len(checked_group)) - intersection) / (max_subpopulation*len(checked_group)*len(checked_group))
     score = (alpha * utility) + ((1 - alpha) * f_intersection)
     return {"utility_sum": utility_sum, "utility": utility, "intersection_sum": intersection,
                       "final_intersection": f_intersection, "score": score}
 
 
-def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda):
+def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN):
     print(f"LOOKING FOR GROUP alpha={alpha} and lamda={lamda}")
     i = 0
     group = []
@@ -202,7 +180,7 @@ def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda):
         for indexes, group_rows in tqdm(df_facts.iterrows(), total=df_facts.shape[0]):
             if group_rows['itemset'] in items:
                 continue
-            score_dict = get_score(max_subpopulation, df_facts, group, group_rows, alpha, K, lamda)
+            score_dict = get_score(max_subpopulation, df_facts, group, group_rows, alpha, K, lamda, df_clean, OUTCOME_COLUMN)
             if score_dict and score_dict["score"] > max_score:
                 max_score = score_dict["score"]
                 curr_row = group_rows
@@ -214,12 +192,13 @@ def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda):
     return group, scores
 
 
-def find_group(df_clean, df_facts):
+def find_group(df_clean, df_facts, PROJECT_DIRECTORY, OUTCOME_COLUMN):
     df_facts = df_facts.dropna()
     max_subpopulation = max(df_facts['size_itemset'])
+    df_facts = df_facts[(df_facts['size_group1']>99) & (df_facts['size_group2']>99)]
     for lamda in [0.00009]:
         for alpha in [0.5]:
-            group, scores = greedy(df_clean, df_facts, max_subpopulation, alpha, lamda)
+            group, scores = greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN)
             df_calc = pd.concat(group, axis=1)
             transposed_df1 = df_calc.T
             transposed_df1.to_csv(f"outputs/{PROJECT_DIRECTORY}/find_k/{K}_{alpha}_{lamda}.csv", index=False)

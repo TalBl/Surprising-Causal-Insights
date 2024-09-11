@@ -1,65 +1,102 @@
 import numpy as np
 from dowhy import CausalModel
+from collections import defaultdict, deque
+import copy
+import networkx as nx
 
 
 P_VAL = 0.05
 
 
-def calc_cate(df, treatment, value, outcome, DAG):
-    """df['new_treatment'] = df[treatment].apply(lambda x: 1 if x == value else 0)
+class Dataset:
+    def __init__(self, name, clean_df, outcome_col, group1, group2, treatments, subpopulations):
+        self.name = name
+        self.clean_df = clean_df
+        self.outcome_col = outcome_col
+        self.group1 = group1
+        self.group2 = group2
+        self.treatments = treatments
+        self.subpopulations = subpopulations
+
+    def get_population(self, subpopulation):
+        df_copy = self.clean_df.copy()
+        for d in subpopulation:
+            df_copy = df_copy[df_copy[d["att"]]==d["value"]]
+        return df_copy
+
+    def get_treatment(self, population, treatment):
+        df_copy = population.copy()
+        for d in treatment:
+            df_copy = df_copy[df_copy[d["att"]]==d["value"]]
+        return df_copy
+
+
+def addTempTreatment(row, t):
+    res = 1
+    if type(t) == dict:
+        t = [t]
+    for d in t:
+        if d['value'](row[d['att']]) == 0:
+            res = 0
+    return res
+
+
+def getTreatmentCATE(df_g, DAG, treatment, target):
+    # df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment, ordinal_atts), axis=1)
+    df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment), axis=1)
+    DAG_ = changeDAG(DAG, treatment)
+    edges = []
+    for line in DAG_:
+        if '->' in line:
+            edges.append([line.split(" ->")[0].split("'")[1], line.split("-> ")[1].split(";'")[0]])
+    causal_graph = nx.DiGraph()
+    causal_graph.add_edges_from(edges)
+    try:
+        ATE, p_value = estimateATE(causal_graph, df_g, 'TempTreatment', target)
+        if p_value > P_VAL:
+            return 0
+    except:
+        return 0
+    return ATE
+
+
+def changeDAG(dag, randomTreatment):
+    DAG = copy.deepcopy(dag)
+    toRomove = []
+    toAdd = ['TempTreatment;']
+    randomTreatment = [randomTreatment] if type(randomTreatment) == dict else randomTreatment
+    atts_treatments = [x['att'] for x in randomTreatment]
+    for a in atts_treatments:
+        for c in DAG:
+            if '->' in c:
+                if a in c:
+                    toRomove.append(c)
+                    # left hand side
+                    if c.find(a) == 0:
+                        string = c.replace(a, "TempTreatment")
+                        if not string in toAdd:
+                            toAdd.append(string)
+    for r in toRomove:
+        if r in DAG:
+            DAG.remove(r)
+    for a in toAdd:
+        if not a in DAG:
+            DAG.append(a)
+    return list(set(DAG))
+
+
+def estimateATE(causal_graph, df, T, O):
     model = CausalModel(
         data=df,
-        graph=DAG,
-        treatment="new_treatment",
-        outcome=outcome)
+        graph=causal_graph,
+        treatment=T,
+        outcome=O)
     estimands = model.identify_effect()
     causal_estimate_reg = model.estimate_effect(estimands,
                                                 method_name="backdoor.linear_regression",
                                                 target_units="ate",
-                                                effect_modifiers=[],
+                                                #evaluate_effect_strength=True,
+                                                effect_modifiers = [],
                                                 test_significance=True)
-    p_val = causal_estimate_reg.test_stat_significance()['p_value']
-    if p_val < P_VAL:
-        return causal_estimate_reg.value
-    else:
-        return"""
-    popu_1 = np.mean(df.loc[df[treatment] == value][outcome])
-    popu_0 = np.mean(df.loc[df[treatment] != value][outcome])
-    return popu_1 - popu_0
-
-
-def so_dag(dag_text):
-    causal_graph = """
-                            digraph {
-                            """
-    for line in dag_text:
-        causal_graph = causal_graph + line + "\n"
-    causal_graph = causal_graph + "}"
-    causal_dag = causal_graph.replace("\n", " ")
-    return causal_dag
-
-
-def ni_score(x, lamda):
-    return 1 - (1 / (np.exp(lamda * x)))
-
-
-def calc_support(group, data):
-    new_df = data.copy()
-    for row in group:
-        new_df = new_df.loc[new_df[row["subpopulation"]] == row["value_population"]]
-        if new_df.shape[0] == 0:
-            return 0
-    return new_df.shape[0] / data.shape[0]
-
-
-def calc_intersection(clean_df, att1, att2):
-    size = clean_df.loc[(clean_df[att1['subpopulation']] == att1['value_population'])
-                        & (clean_df[att2['subpopulation']] == att2['value_population'])]
-    return size.shape[0]
-
-
-def mini_calc_intersection(clean_df, att1):
-    size = clean_df.loc[clean_df[att1['subpopulation']] == att1['value_population']]
-    return size.shape[0]
-
+    return causal_estimate_reg.value, causal_estimate_reg.test_stat_significance()['p_value']
 

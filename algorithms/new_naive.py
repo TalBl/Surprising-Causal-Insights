@@ -21,26 +21,7 @@ CALCED_UTILITY = {}
 def so_syn_dag():
     G = nx.DiGraph()
     G.add_edges_from([
-        ("EdLevel", "ConvertedCompYearly"),
-        ("YearsCodePro", "ConvertedCompYearly"),
-        ("Country", "ConvertedCompYearly"),
-        ("Age", "ConvertedCompYearly"),
-        ("WorkExp", "ConvertedCompYearly"),
-        ("Data scientist or machine learning specialist_DevType", "ConvertedCompYearly"),
-        ("Developer, full-stack_DevType", "ConvertedCompYearly"),
-        ("Engineer, data_DevType", "ConvertedCompYearly"),
-        ("C#_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Go_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Java_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Julia_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Python_LanguageHaveWorkedWith", "ConvertedCompYearly"),
-        ("Woman_Gender", "ConvertedCompYearly"),
-        ("Man_Gender", "ConvertedCompYearly"),
-        ("African_Ethnicity", "ConvertedCompYearly"),
-        ("Black_Ethnicity", "ConvertedCompYearly"),
-        ("Asian_Ethnicity", "ConvertedCompYearly"),
-        ("White_Ethnicity", "ConvertedCompYearly"),
-        ("new_treatment", "ConvertedCompYearly")
+        ("new_treatment", "totChol")
     ])
     return G
 

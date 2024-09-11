@@ -1,52 +1,48 @@
 import pandas as pd
 
-FOLDER_PATH = "data/so/"
-PATH_CLEAN = "../data/so/so_clean.csv"
-FULL_PATH_CLEAN = FOLDER_PATH + PATH_CLEAN
+
+def convert_to_yearly(row):
+    if row['SalaryType'] == 'Weekly':
+        return row['ConvertedSalary'] * 52  # Assuming 52 weeks per year
+    elif row['SalaryType'] == 'Monthly':
+        return row['ConvertedSalary'] * 12  # Assuming 12 months in a year
+    else:  # Already yearly
+        return 0
 
 
-def clean_so():
-    df = pd.read_csv('../data/so/2018_data.csv')
-    df = df[['Country',
-             'Employment',
-             'CompanySize',
-             'YearsCoding',
-             'ConvertedSalary',
-             'Gender',
-             'Age']]
-    df = df[(df['ConvertedSalary']>1000) & (df['ConvertedSalary']<490000)]
-    df_country = df['Country'].value_counts().head(10)
-    df = df[ df['Country'].isin(df_country[:10].index ) ]
-    employment = ['Employed full-time',
-                  'Employed part-time',
-                  'Independent contractor, freelancer, or self-employed']
-    df = df[df['Employment'].fillna('Employed full-time').isin(employment)]
-    company_size = ['Fewer than 10 employees', '10 to 19 employees', '20 to 99 employees', '100 to 499 employees', '500 to 999 employees', '1,000 to 4,999 employees', '5,000 to 9,999 employees', '10,000 or more employees']
-    mapping_company_size = {key:i for i, key in enumerate(company_size)}
-    df = df.dropna(subset=['CompanySize'])
-    df['Gender'] = df['Gender'].fillna('Male')
-    df = df[df['Gender'].isin(['Male', 'Female'])]
-
-    # Ordered age sacle
-    age = ['Under 18 years old',
-           '18 - 24 years old',
-           '25 - 34 years old',
-           '35 - 44 years old',
-           '45 - 54 years old',
-           '55 - 64 years old',
-           '65 years or older']
-    mapping_age = {key:i for i, key in enumerate(age)}
-
-    # Transform category to numerical column
-    df['Age'] = df['Age'].fillna('25 - 34 years old')
-
-    df.to_csv(PATH_CLEAN, index=False)
+INPUT_DF_PATH = "data/so/2018_data.csv"
+def build_mini_df():
+    df = pd.read_csv(INPUT_DF_PATH)
+    df['group1'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Female" else 0)
+    df['group2'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Male" else 0)
+    df['ConvertedCompYearly'] = df.apply(convert_to_yearly, axis=1)
+    df = df.loc[(df["group1"] == 1) | (df["group2"] == 1)]
+    df = df[['group1', 'group2', 'YearsCodingProf', 'FormalEducation','DevType','Age','EducationParents','MilitaryUS','UndergradMajor',
+             'RaceEthnicity', 'Country', 'JobSatisfaction', 'Hobby', 'Student','JobSearchStatus',
+             'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise', 'ConvertedCompYearly']]
+    df = df.dropna(subset=['ConvertedCompYearly'])
+    return df
 
 
-def get_secured_population(df):
-    selected_rows = df.loc[~df['Gender'].str.contains("Male")]
-    selected_rows.reset_index(drop=True, inplace=True)
-    return selected_rows
+SUBPOPULATIONS = ['Age', 'RaceEthnicity', 'Country','Student','UndergradMajor']
 
+TREATMENTS = [{"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x == "0-2 years" else 0},
+              {"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x in ["0-2 years","3-5 years"] else 0},
+              {"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x in ["0-2 years","3-5 years","6-8 years"] else 0},
+              {"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x in ["0-2 years","3-5 years","6-8 years","9-11 years"] else 0},
+              {"att": "FormalEducation", "value": lambda x: 1 if pd.notna(x) and 'Master' in x else 0},
+              {"att": "FormalEducation", "value": lambda x: 1 if pd.notna(x) and 'Bachelor' in x else 0},
+              {"att": "DevType", "value": lambda x: 1 if pd.notna(x) and 'Data scientist' in x else 0},
+              {"att": "DevType", "value": lambda x: 1 if pd.notna(x) and 'Developer, back-end' in x else 0},
+              {"att": "Hobby", "value": lambda x: 1 if pd.notna(x) and x == "Yes" else 0},
+              {"att": "DevType", "value": lambda x: 1 if pd.notna(x) and 'Full-stack developer' in x else 0},
+              {"att": "DevType", "value": lambda x: 1 if pd.notna(x) and 'Engineering manager' in x else 0},
+              {"att": "JobSatisfaction", "value": lambda x: 1 if pd.notna(x) and 'Extremely satisfied' in x else 0},
+              {"att": "LastNewJob", "value": lambda x: 1 if pd.notna(x) and 'More than 4 years ago' in x else 0},
+              {"att": "HopeFiveYears", "value": lambda x: 1 if pd.notna(x) and 'Working as a founder' in x else 0},
+              {"att": "WakeTime", "value": lambda x: 1 if pd.notna(x) and 'Between 7:01 - 8:00 AM' in x else 0},
+              {"att": "WakeTime", "value": lambda x: 1 if pd.notna(x) and 'Between 5:00 - 6:00 AM' in x else 0},
+              {"att": "Exercise", "value": lambda x: 1 if pd.notna(x) and '3 - 4 times per week' in x else 0}]
 
+OUTCOME_COLUMN = "ConvertedCompYearly"
 
