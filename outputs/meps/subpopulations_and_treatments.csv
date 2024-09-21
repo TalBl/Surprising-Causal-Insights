@@ -1,1 +1,26 @@
-
+itemset,treatment
+"frozenset({'BornInUSA=1.0', 'Race=1'})",IsWorking_4.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'BornInUSA=1.0', 'Race=1'})",IsWorking_4.0
+"frozenset({'BornInUSA=1.0', 'Race=1', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+"frozenset({'Race=1', 'BornInUSA=1.0', 'IsHadStroke=2.0'})",IsWorking_4.0
+"frozenset({'Race=1', 'BornInUSA=1.0', 'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+frozenset({'BornInUSA=1.0'}),IsWorking_4.0
+frozenset({'Race=1'}),TakesAspirinFrequently_1.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'Race=1'})",TakesAspirinFrequently_2.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'BornInUSA=1.0', 'IsHadHeartAttack=2.0'})",TakesAspirinFrequently_1.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'BornInUSA=1.0', 'IsHadStroke=2.0'})",IsWorking_4.0
+"frozenset({'BornInUSA=1.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'Race=1', 'IsHadHeartAttack=2.0'})",CurrentlySmoke_0
+"frozenset({'Race=1', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+"frozenset({'BornInUSA=1.0', 'IsHadStroke=2.0'})",IsWorking_4.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'BornInUSA=1.0', 'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'Race=1', 'IsHadStroke=2.0'})",IsWorking_4.0
+"frozenset({'Race=1', 'IsHadStroke=2.0'})",IsWorking_4.0
+"frozenset({'BornInUSA=1.0', 'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'Race=1', 'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",CurrentlySmoke_0
+"frozenset({'Race=1', 'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0
+frozenset({'IsDiagnosedAsthma=2.0'}),TakesAspirinFrequently_1.0
+"frozenset({'IsDiagnosedAsthma=2.0', 'IsHadHeartAttack=2.0'})",TakesAspirinFrequently_1.0
+frozenset({'IsHadHeartAttack=2.0'}),IsWorking_4.0
+frozenset({'IsHadStroke=2.0'}),IsWorking_4.0
+"frozenset({'IsHadStroke=2.0', 'IsHadHeartAttack=2.0'})",IsWorking_4.0

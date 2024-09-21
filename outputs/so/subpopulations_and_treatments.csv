@@ -1,1 +1,12 @@
-
+itemset,treatment
+"frozenset({'RaceEthnicity=White or of European descent', 'Age=18 - 24 years old'})",FormalEducation_Associate degree
+"frozenset({'Student=No', 'UndergradMajor=Computer science, computer engineering, or software engineering', 'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",WakeTime_Between 5:00 - 6:00 AM
+frozenset({'Student=No'}),DevType_Embeddedapplicationsordevicesdeveloper_0
+"frozenset({'UndergradMajor=Computer science, computer engineering, or software engineering', 'Age=25 - 34 years old'})",DevType_Full-stackdeveloper_0
+frozenset({'RaceEthnicity=White or of European descent'}),DevType_Embeddedapplicationsordevicesdeveloper_0
+"frozenset({'Student=No', 'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",DevType_Databaseadministrator_0
+"frozenset({'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",DevType_Dataorbusinessanalyst_0
+"frozenset({'RaceEthnicity=White or of European descent', 'Student=No'})",DevType_Embeddedapplicationsordevicesdeveloper_0
+"frozenset({'RaceEthnicity=White or of European descent', 'Country=United States'})",DevType_Embeddedapplicationsordevicesdeveloper_0
+"frozenset({'Student=No', 'Country=United States'})",DevType_Embeddedapplicationsordevicesdeveloper_0
+"frozenset({'Country=United States', 'Age=25 - 34 years old'})",YearsCodingProf_0-2 years

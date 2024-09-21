@@ -16,15 +16,39 @@ def build_mini_df():
     df['group1'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Female" else 0)
     df['group2'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Male" else 0)
     df['ConvertedCompYearly'] = df.apply(convert_to_yearly, axis=1)
+    options_df = df["DevType"].str.get_dummies(sep=";")
+    l = ["DevType_"+x.replace(" ", "") for x in list(options_df.columns)]
+    options_df.columns = l
+    df = pd.concat([df.drop(columns=["DevType"]), options_df], axis=1)
     df = df.loc[(df["group1"] == 1) | (df["group2"] == 1)]
-    df = df[['group1', 'group2', 'YearsCodingProf', 'FormalEducation','DevType','Age','EducationParents','MilitaryUS','UndergradMajor',
-             'RaceEthnicity', 'Country', 'JobSatisfaction', 'Hobby', 'Student','JobSearchStatus',
-             'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise', 'ConvertedCompYearly']]
+    wanted_columns = ['group1', 'group2', 'YearsCodingProf', 'FormalEducation','Age',
+                      'RaceEthnicity', 'Country', 'JobSatisfaction', 'Hobby', 'Student','UndergradMajor',
+                      'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise', 'ConvertedCompYearly'] + l
+    df = df[wanted_columns]
+    column_original_col = {}
+    for col in list(df.columns):
+        if col.split("_")[0] == "DevType":
+            column_original_col[col] = "DevType"
+        else:
+            column_original_col[col] = col
     df = df.dropna(subset=['ConvertedCompYearly'])
-    return df
+    return df, column_original_col
 
 
 SUBPOPULATIONS = ['Age', 'RaceEthnicity', 'Country','Student','UndergradMajor']
+
+def create_value_dict(df: pd.DataFrame, columns: list) -> dict:
+    result = {}
+    for col in columns:
+        unique_values = df[col].dropna().unique()
+        for value in unique_values:
+            key = f"{col}_{value}"
+            result[key] = {
+                "att": col,
+                "value": lambda x, v=value: 1 if pd.notna(x) and x == v else 0
+            }
+    return result
+
 
 TREATMENTS = [{"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x == "0-2 years" else 0},
               {"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and x in ["0-2 years","3-5 years"] else 0},
@@ -46,3 +70,5 @@ TREATMENTS = [{"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and
 
 OUTCOME_COLUMN = "ConvertedCompYearly"
 
+TREATMENTS_COLUMNS = ['YearsCodingProf', 'FormalEducation','DevType','JobSatisfaction', 'Hobby',
+                      'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise']

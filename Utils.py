@@ -5,7 +5,7 @@ import copy
 import networkx as nx
 
 
-P_VAL = 0.05
+P_VAL = 0.1
 
 
 class Dataset:
@@ -41,38 +41,43 @@ def addTempTreatment(row, t):
     return res
 
 
-def getTreatmentCATE(df_g, DAG, treatment, target):
+def getTreatmentCATE(df_g, DAG, treatment, target, cols_dict, graph_dict=None):
     # df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment, ordinal_atts), axis=1)
     df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment), axis=1)
-    DAG_ = changeDAG(DAG, treatment)
-    edges = []
-    for line in DAG_:
-        if '->' in line:
-            edges.append([line.split(" ->")[0].split("'")[1], line.split("-> ")[1].split(";'")[0]])
-    causal_graph = nx.DiGraph()
-    causal_graph.add_edges_from(edges)
+    if type(treatment) == dict and treatment["att"] in graph_dict:
+        causal_graph = graph_dict[treatment["att"]]
+    else:
+        DAG_ = changeDAG(DAG, treatment, cols_dict)
+        edges = []
+        for line in DAG_:
+            if '->' in line:
+                edges.append([line.split(" ->")[0].split("'")[1], line.split("-> ")[1].split(";'")[0]])
+        causal_graph = nx.DiGraph()
+        causal_graph.add_edges_from(edges)
+        if type(treatment) == dict:
+            graph_dict[treatment["att"]] = causal_graph
     try:
         ATE, p_value = estimateATE(causal_graph, df_g, 'TempTreatment', target)
         if p_value > P_VAL:
             return 0
-    except:
+    except Exception as e:
         return 0
     return ATE
 
 
-def changeDAG(dag, randomTreatment):
+def changeDAG(dag, randomTreatment, cols_dict):
     DAG = copy.deepcopy(dag)
     toRomove = []
     toAdd = ['TempTreatment;']
     randomTreatment = [randomTreatment] if type(randomTreatment) == dict else randomTreatment
-    atts_treatments = [x['att'] for x in randomTreatment]
+    atts_treatments = [cols_dict[x['att']] for x in randomTreatment]
     for a in atts_treatments:
         for c in DAG:
             if '->' in c:
                 if a in c:
                     toRomove.append(c)
                     # left hand side
-                    if c.find(a) == 0:
+                    if a in c.split(" ->")[0]:
                         string = c.replace(a, "TempTreatment")
                         if not string in toAdd:
                             toAdd.append(string)

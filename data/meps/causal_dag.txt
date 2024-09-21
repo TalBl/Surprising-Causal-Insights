@@ -1,31 +1,4 @@
 DAG = [
-'Region;',
- 'Married;',
- 'Student;',
- 'Age;',
- 'Race;',
- 'Sex;',
- 'Education;',
- 'FamilyIncomeWage;',
- 'IsPregnant;',
- 'IsHadHeartAttack;',
- 'IsHadStroke;',
- 'IsDiagnosedCancer;',
- 'IsDiagnosedDiabetes;',
- 'IsDiagnosedAsthma;',
- 'IsBornInUSA;',
- 'IsADHD/ADD_Diagnisos;',
- 'AgeDiagnosedHighCholesterol;',
- 'HowOftenCheckInDoctor;',
- 'DoesDoctorRecommendExercise;',
- 'LongSinceLastFluVaccination;',
- 'TakesAspirinFrequently;',
- 'Exercise;',
- 'WearsSeatBelt;',
- 'CurrentlySmoke;',
- 'FeltNervous;',
- 'HoldHealthInsurance;',
- 'IsWorking;',
  'BMI;',
 
 'Region -> Education;',
@@ -50,6 +23,10 @@ DAG = [
 'Student -> FeltNervous;',
 'Student -> Exercise;',
 'Student -> CurrentlySmoke;',
+'IsADHD/ADD_Diagnisos -> Education;',
+'Sex -> IsADHD/ADD_Diagnisos;',
+'Age -> IsADHD/ADD_Diagnisos;',
+'Race -> IsADHD/ADD_Diagnisos;',
 
 'Age -> FamilyIncomeWage;',
 'Age -> Education;',
@@ -98,7 +75,6 @@ DAG = [
 'Education -> CurrentlySmoke;',
 
 'FamilyIncomeWage -> HoldHealthInsurance;',
-'FamilyIncomeWage -> IsWorking;',
 'FamilyIncomeWage -> Exercise;',
 'FamilyIncomeWage -> WearsSeatBelt;',
 'FamilyIncomeWage -> BMI;',
@@ -119,7 +95,6 @@ DAG = [
 
 'DoesDoctorRecommendExercise -> Exercise;',
 
-'LongSinceLastFluVaccination -> CurrentlySmoke;',
 
 'TakesAspirinFrequently -> IsHadHeartAttack;',
 'TakesAspirinFrequently -> IsHadStroke;',
@@ -127,11 +102,8 @@ DAG = [
 'TakesAspirinFrequently -> IsDiagnosedCancer;',
 
 'Exercise -> BMI;',
-'Exercise -> CurrentlySmoke;',
-'Exercise -> WearsSeatBelt;',
-'Exercise -> IsWorking;',
+'CurrentlySmoke -> Exercise;',
 
-'WearsSeatBelt -> FeltNervous;',
 
 'CurrentlySmoke -> BMI;',
 'CurrentlySmoke -> FeltNervous;',
@@ -140,8 +112,6 @@ DAG = [
 'CurrentlySmoke -> IsDiagnosedCancer;',
 
 'FeltNervous -> BMI;',
-'FeltNervous -> HoldHealthInsurance;',
-'FeltNervous -> IsWorking;',
 'FeltNervous -> Exercise;',
 
 'HoldHealthInsurance -> HowOftenCheckInDoctor;',
@@ -161,5 +131,4 @@ DAG = [
 
 'BMI -> IsDiagnosedDiabetes;',
 'BMI -> IsDiagnosedAsthma;',
-'BMI -> FeltNervous;'
 ]

@@ -5,19 +5,20 @@ import networkx as nx
 
 def build_mini_df():
     df = pd.read_csv(INPUT_DF_PATH)
-    df['group2'] = 1
+    df['group2'] = df['AGELAST'].apply(lambda x: 1 if x >= 60 else 0)
+    df['group1'] = df['AGELAST'].apply(lambda x: 1 if x <= 30 else 0)
     # Subpopulations
     df['Region'] = df['REGION15']
     df["Married"] = df["MARRY15X"]
     df["Student"] = df["FTSTU15X"]
-    df['-14 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 14 else 0)
+    """df['-14 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 14 else 0)
     df['-24 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 24 else 0)
     df['-34 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 34 else 0)
     df['-44 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 44 else 0)
     df['-54 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 54 else 0)
     df['-64 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 64 else 0)
     df['-74 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 74 else 0)
-    df['-85 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 84 else 0)
+    df['-85 years old'] = df['AGELAST'].apply(lambda x: 1 if x <= 84 else 0)"""
     df["Race"] = df["RACEV1X"]
     df["Sex"] = df["SEX"]
     df["Education"] = df["HIDEG"]
@@ -40,26 +41,46 @@ def build_mini_df():
     df["FeltNervous"] = df["ADNERV42"]
     df["HoldHealthInsurance"] = df["INSURC15"]
     df["IsWorking"] = df["EMPST53"]
-    df['IsUnderWeight'] = df['BMINDX53'].apply(lambda x: 1 if x <= 18.5 else 0)
+    """df['IsUnderWeight'] = df['BMINDX53'].apply(lambda x: 1 if x <= 18.5 else 0)
     df['IsOverWeight'] = df['BMINDX53'].apply(lambda x: 1 if 25.0 <= x <= 29.9 else 0)
-    df['IsObesity'] = df['BMINDX53'].apply(lambda x: 1 if x >= 30 else 0)
-    df['group1'] = df['ADSMOK42'].fillna(0).apply(lambda x: 1 if x and x == 1 else 0) # smokers
+    df['IsObesity'] = df['BMINDX53'].apply(lambda x: 1 if x >= 30 else 0)"""
+    df['CurrentlySmoke'] = df['ADSMOK42'].fillna(0).apply(lambda x: 1 if x and x == 1 else 0) # smokers
 
     df = df.dropna()
-    # filter person that diagnosed with high choloesterol
-    df = df.loc[df['CHOLAGED']>0]
-    return df[['group1', 'group2', 'Region', 'Married', 'Student', '-14 years old', '-24 years old', '-34 years old',
-               '-44 years old', '-54 years old', '-64 years old', '-74 years old', '-85 years old', 'Race', 'Sex', 'Education',
+    column_original_col = {}
+    for col in list(df.columns):
+        column_original_col[col] = col
+    df = df[['group1', 'group2', 'Region', 'Married', 'Student', 'Race', 'Sex', 'Education',
                'FamilyIncome', 'Pregnant', 'IsHadHeartAttack', 'IsHadStroke', 'IsDiagnosedCancer',
                 'IsDiagnosedAsthma', 'BornInUSA', 'ADHD/ADD_Diagnisos',
                'DoesDoctorRecommendExercise', 'LongSinceLastFluVaccination', 'TakesAspirinFrequently', 'Exercise',
-               'WearsSeatBelt', 'FeltNervous', 'HoldHealthInsurance', 'IsWorking', 'IsUnderWeight',
-               'IsOverWeight', 'IsObesity']]
+               'WearsSeatBelt', 'FeltNervous', 'HoldHealthInsurance', 'IsWorking', 'CurrentlySmoke']]
+    df = df.loc[(df["group1"] == 1) | (df["group2"] == 1)]
+    proportion_of_neg1 = (df == -1).mean()
+    df = df.loc[:, proportion_of_neg1 <= 0.5]
+    df = df[df >= 0].dropna()
+    return df, column_original_col
 
-SUBPOPULATIONS = ["Married", "Student", '-14 years old', '-24 years old', '-34 years old',
-                  '-44 years old', '-54 years old', '-64 years old', '-74 years old', '-85 years old', 'Race',
-                  'Sex', 'Education', 'FamilyIncome', 'Pregnant', 'IsHadHeartAttack', 'IsHadStroke',
-                  'IsDiagnosedAsthma', 'BornInUSA', 'ADHD/ADD_Diagnisos']
+SUBPOPULATIONS = ["Married", 'Race',
+                  'Sex', 'Education', 'FamilyIncome', 'IsHadHeartAttack', 'IsHadStroke',
+                  'IsDiagnosedAsthma', 'BornInUSA']
+
+
+def create_value_dict(df: pd.DataFrame, columns: list) -> dict:
+    result = {}
+    for col in columns:
+        unique_values = df[col].dropna().unique()
+        for value in unique_values:
+            key = f"{col}_{value}"
+            result[key] = {
+                "att": col,
+                "value": lambda x, v=value: 1 if pd.notna(x) and x == v else 0
+            }
+    return result
+
+TREATMENTS_COLUMNS = ['Region', 'DoesDoctorRecommendExercise', 'LongSinceLastFluVaccination', 'TakesAspirinFrequently', 'Exercise',
+                      'WearsSeatBelt', 'FeltNervous', 'HoldHealthInsurance', 'IsWorking', 'CurrentlySmoke']
+
 
 TREATMENTS = [{"att": "DoesDoctorRecommendExercise", "value": 1}, {"att": "DoesDoctorRecommendExercise", "value": 2}, {"att": "LongSinceLastFluVaccination", "value": 1},
               {"att": "LongSinceLastFluVaccination", "value": 2}, {"att": "TakesAspirinFrequently", "value": 1},{"att": "TakesAspirinFrequently", "value": 2},

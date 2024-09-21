@@ -5,59 +5,26 @@ import networkx as nx
 import itertools
 import ast
 from tqdm import tqdm
+from Utils import getTreatmentCATE
 
-K = 10
-LAMDA_VALUES = [0.0001, 0.00005, 0.9999]
-PROTECTED_COLUMN = "Woman_Gender"
+K = 5
+LAMDA_VALUES = [0.0001, 0.00005, 0.0000001]
 CALCED_INTERSECTIONS = {}
 
 
-def calc_cate(group: list, df: pd.DataFrame, outcome_column, att: list, val: list, graph):
-    filtered_df = df.copy()
-    if len(group) == 1:
-        for d in group:
-            filtered_df = filtered_df[filtered_df[d["att"]] == d['value']]
-    if filtered_df.shape[0] == 0:
-        return None,None
-    # Initialize the new_treatment column to 1
-    filtered_df["new_treatment"] = 1
-    for attribute, desired_value in zip(att, val):
-        filtered_df["new_treatment"] = filtered_df["new_treatment"] & filtered_df[attribute].apply(lambda x: 1 if x == desired_value else 0).astype(int)
-
-    model = CausalModel(
-        data=filtered_df,
-        graph=graph,
-        treatment=att[0],
-        outcome=outcome_column)
-    values = list(set(filtered_df["new_treatment"]))
-    if len(values) == 1:
-        return None,None
-    estimands = model.identify_effect()
-    causal_estimate_reg = model.estimate_effect(estimands,
-                                                method_name="backdoor.linear_regression",
-                                                target_units="ate",
-                                                effect_modifiers=[],
-                                                test_significance=True)
-
-    p_val = causal_estimate_reg.test_stat_significance()['p_value']
-    if p_val < 0.9:
-        return causal_estimate_reg.value, p_val
-    return None,None
-
-
-def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means, OUTCOME_COLUMN, graph):
-    ate1, p_v1 = calc_cate(group1, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()), graph)
-    ate2, p_v2 = calc_cate(group2, data, OUTCOME_COLUMN, list(treatment_d.keys()), list(treatment_d.values()), graph)
+def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means, OUTCOME_COLUMN, graph, cols_dict):
+    ate1 = getTreatmentCATE(group1, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
+    ate2 = getTreatmentCATE(group2, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
+    # getTreatmentCATE(df_group1, graph, t, output_att, cols_dict)
     if ate1 and ate2:
         iscore = abs(ate1 - ate2)
         return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
                 'iscore': iscore, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
                 "ni_score": ni_score(iscore, LAMDA_VALUES[2]),
-                "p_v1": p_v1, "p_v2": p_v2, "utility": ni_score(iscore, LAMDA_VALUES[2]), "std": std, "diff_means": diff_means}
+                "utility": ni_score(iscore, LAMDA_VALUES[2]), "std": std, "diff_means": diff_means}
     return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
             'iscore': None, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
-            "ni_score": None,
-            "p_v1": p_v1, "p_v2": p_v2, "utility": None, "std": std, "diff_means": diff_means}
+            "ni_score": None, "utility": None, "std": std, "diff_means": diff_means}
 
 
 def ni_score(x, lamda):
@@ -67,20 +34,21 @@ def ni_score(x, lamda):
 # Convert values to appropriate types
 def convert_value(val):
     try:
-        return int(val)
+        return float(val)
     except ValueError:
         return val
 
 
 def parse_treatment(input_str):
     # Remove the outer parentheses and strip extra quotes if present
-    s = ast.literal_eval(f"{input_str}")
-    res_dict = {}
-    if type(s) == dict:
-        s = [s]
-    for d in s:
-        res_dict[d["att"]] = d["value"]
-    return res_dict
+    treats = input_str.split("+")
+    res_list = []
+    for t in treats:
+        val = convert_value(t.split("_")[-1])
+        value = lambda x, v=val: 1 if pd.notna(x) and x == v else 0
+        att = t.split("_")[0]
+        res_list.append({"att": att, "value": value, "val_specified": val})
+    return res_list
 
 
 def parse_itemset(itemset):
@@ -92,7 +60,7 @@ def parse_itemset(itemset):
     return item_set
 
 
-def calc_facts_metrics(data, group1, group2, meta_data, OUTCOME_COLUMN, graph):
+def calc_facts_metrics(data, meta_data, OUTCOME_COLUMN, graph, cols_dict, graph_dict=None):
     n = data.shape[0]
     results = []
     for idx, (itemset, treatment) in meta_data.iterrows():
@@ -102,28 +70,24 @@ def calc_facts_metrics(data, group1, group2, meta_data, OUTCOME_COLUMN, graph):
         for key, value in item_set.items():
             population = population[population[key] == value]
         if population.shape[0] == 0:
-            return None
+            continue
         size = population.shape[0]
         support = size / n
         std = np.std(population[OUTCOME_COLUMN])
         df_group1 = population.copy()
-        if len(group1) == 1:
-            for d in group1:
-                df_group1 = df_group1[df_group1[d["att"]]==d["value"]]
+        df_group1 = df_group1.loc[df_group1['group1'] == 1]
         df_group2 = population.copy()
-        if len(group2) == 1:
-            for d in group2:
-                df_group2 = df_group2[df_group2[d["att"]]==d["value"]]
+        df_group2 = df_group2.loc[df_group2['group2'] == 1]
         size_group1 = df_group1.shape[0]
         size_group2 = df_group2.shape[0]
         diff_means = np.mean(df_group1[OUTCOME_COLUMN]) - np.mean(df_group2[OUTCOME_COLUMN])
         treated = population.copy()
-        for key, value in treatments_d.items():
-            treated = treated[treated[key] == value]
+        for d in treatments_d:
+            treated = treated[treated[d['att']] == d['val_specified']]
         if treated.shape[0] == 0:
-            return None
-        r = analyze_relation(population, group1, group2, item_set, treatments_d, size, size_group1, size_group2, support,
-                             std, diff_means, OUTCOME_COLUMN, graph)
+            continue
+        r = analyze_relation(population, df_group1, df_group2, item_set, treatments_d, size, size_group1, size_group2, support,
+                             std, diff_means, OUTCOME_COLUMN, graph, cols_dict)
         if r:
             results.append(r)
     return results
@@ -195,7 +159,7 @@ def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN):
 def find_group(df_clean, df_facts, PROJECT_DIRECTORY, OUTCOME_COLUMN):
     df_facts = df_facts.dropna()
     max_subpopulation = max(df_facts['size_itemset'])
-    df_facts = df_facts[(df_facts['size_group1']>99) & (df_facts['size_group2']>99)]
+    df_facts = df_facts[(df_facts['size_group1']>49) & (df_facts['size_group2']>49)]
     for lamda in [0.00009]:
         for alpha in [0.5]:
             group, scores = greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN)
