@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 def convert_to_yearly(row):
     if row['SalaryType'] == 'Weekly':
@@ -13,29 +13,35 @@ def convert_to_yearly(row):
 INPUT_DF_PATH = "data/so/2018_data.csv"
 def build_mini_df():
     df = pd.read_csv(INPUT_DF_PATH)
-    df['group1'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Female" else 0)
-    df['group2'] = df['Gender'].fillna("").apply(lambda x: 1 if x == "Male" else 0)
+    df['group1'] = np.where(df['FormalEducation'].str.contains('Master', case=False, na=False), 1, 0)
+    df['group2'] = np.where(df['FormalEducation'].str.contains('Bachelor', case=False, na=False), 1, 0)
     df['ConvertedCompYearly'] = df.apply(convert_to_yearly, axis=1)
     options_df = df["DevType"].str.get_dummies(sep=";")
     l = ["DevType_"+x.replace(" ", "") for x in list(options_df.columns)]
     options_df.columns = l
     df = pd.concat([df.drop(columns=["DevType"]), options_df], axis=1)
+    options_df = df["RaceEthnicity"].str.get_dummies(sep=";")
+    l2 = ["RaceEthnicity_"+x.replace(" ", "") for x in list(options_df.columns)]
+    options_df.columns = l2
+    df = pd.concat([df.drop(columns=["RaceEthnicity"]), options_df], axis=1)
     df = df.loc[(df["group1"] == 1) | (df["group2"] == 1)]
-    wanted_columns = ['group1', 'group2', 'YearsCodingProf', 'FormalEducation','Age',
-                      'RaceEthnicity', 'Country', 'JobSatisfaction', 'Hobby', 'Student','UndergradMajor',
-                      'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise', 'ConvertedCompYearly'] + l
+    wanted_columns = ['group1', 'group2', 'YearsCodingProf', 'Country','Age',
+                      'Gender', 'JobSatisfaction', 'Hobby', 'Student',
+                      'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise', 'ConvertedCompYearly'] + l + l2
     df = df[wanted_columns]
     column_original_col = {}
     for col in list(df.columns):
         if col.split("_")[0] == "DevType":
             column_original_col[col] = "DevType"
+        elif col.split("_")[0] == "RaceEthnicity":
+            column_original_col[col] = "RaceEthnicity"
         else:
             column_original_col[col] = col
     df = df.dropna(subset=['ConvertedCompYearly'])
     return df, column_original_col
 
 
-SUBPOPULATIONS = ['Age', 'RaceEthnicity', 'Country','Student','UndergradMajor']
+SUBPOPULATIONS = ['Gender', 'Hobby', 'Student', 'LastNewJob', 'Exercise']
 
 def create_value_dict(df: pd.DataFrame, columns: list) -> dict:
     result = {}
@@ -70,5 +76,6 @@ TREATMENTS = [{"att": "YearsCodingProf", "value": lambda x: 1 if pd.notna(x) and
 
 OUTCOME_COLUMN = "ConvertedCompYearly"
 
-TREATMENTS_COLUMNS = ['YearsCodingProf', 'FormalEducation','DevType','JobSatisfaction', 'Hobby',
-                      'LastNewJob', 'HopeFiveYears', 'WakeTime', 'Exercise']
+TREATMENTS_COLUMNS = ['YearsCodingProf', 'Country','Age',
+                      'RaceEthnicity', 'JobSatisfaction',
+                      'HopeFiveYears', 'WakeTime', 'DevType']

@@ -44,8 +44,8 @@ def addTempTreatment(row, t):
 def getTreatmentCATE(df_g, DAG, treatment, target, cols_dict, graph_dict=None):
     # df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment, ordinal_atts), axis=1)
     df_g['TempTreatment'] = df_g.apply(lambda row: addTempTreatment(row, treatment), axis=1)
-    if type(treatment) == dict and treatment["att"] in graph_dict:
-        causal_graph = graph_dict[treatment["att"]]
+    if type(treatment) == dict and cols_dict[treatment["att"]] in graph_dict:
+        causal_graph = graph_dict[cols_dict[treatment["att"]]]
     else:
         DAG_ = changeDAG(DAG, treatment, cols_dict)
         edges = []
@@ -55,14 +55,14 @@ def getTreatmentCATE(df_g, DAG, treatment, target, cols_dict, graph_dict=None):
         causal_graph = nx.DiGraph()
         causal_graph.add_edges_from(edges)
         if type(treatment) == dict:
-            graph_dict[treatment["att"]] = causal_graph
+            graph_dict[cols_dict[treatment["att"]]] = causal_graph
     try:
         ATE, p_value = estimateATE(causal_graph, df_g, 'TempTreatment', target)
         if p_value > P_VAL:
-            return 0
+            return 0, graph_dict
     except Exception as e:
-        return 0
-    return ATE
+        return 0, graph_dict
+    return ATE, graph_dict
 
 
 def changeDAG(dag, randomTreatment, cols_dict):

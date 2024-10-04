@@ -29,7 +29,7 @@ def build_mini_df():
     df["IsDiagnosedCancer"] = df["CANCERDX"]
     df["IsDiagnosedDiabetes"] = df["DIABDX"]
     df["IsDiagnosedAsthma"] = df["ASTHDX"]
-    df["BornInUSA"] = df["BORNUSA"]
+    df["IsBornInUSA"] = df["BORNUSA"]
     df["ADHD/ADD_Diagnisos"] = df["ADHDADDX"]
 
     #Treatments
@@ -51,8 +51,8 @@ def build_mini_df():
     for col in list(df.columns):
         column_original_col[col] = col
     df = df[['group1', 'group2', 'Region', 'Married', 'Student', 'Race', 'Sex', 'Education',
-               'FamilyIncome', 'Pregnant', 'IsHadHeartAttack', 'IsHadStroke', 'IsDiagnosedCancer',
-                'IsDiagnosedAsthma', 'BornInUSA', 'ADHD/ADD_Diagnisos',
+               'Pregnant', 'IsHadHeartAttack', 'IsHadStroke', 'IsDiagnosedCancer',
+                'IsDiagnosedAsthma', 'IsBornInUSA', 'ADHD/ADD_Diagnisos',
                'DoesDoctorRecommendExercise', 'LongSinceLastFluVaccination', 'TakesAspirinFrequently', 'Exercise',
                'WearsSeatBelt', 'FeltNervous', 'HoldHealthInsurance', 'IsWorking', 'CurrentlySmoke']]
     df = df.loc[(df["group1"] == 1) | (df["group2"] == 1)]
@@ -61,9 +61,7 @@ def build_mini_df():
     df = df[df >= 0].dropna()
     return df, column_original_col
 
-SUBPOPULATIONS = ["Married", 'Race',
-                  'Sex', 'Education', 'FamilyIncome', 'IsHadHeartAttack', 'IsHadStroke',
-                  'IsDiagnosedAsthma', 'BornInUSA']
+SUBPOPULATIONS = ['Married', 'IsHadStroke', 'DoesDoctorRecommendExercise', 'IsWorking', 'CurrentlySmoke']
 
 
 def create_value_dict(df: pd.DataFrame, columns: list) -> dict:
@@ -78,8 +76,10 @@ def create_value_dict(df: pd.DataFrame, columns: list) -> dict:
             }
     return result
 
-TREATMENTS_COLUMNS = ['Region', 'DoesDoctorRecommendExercise', 'LongSinceLastFluVaccination', 'TakesAspirinFrequently', 'Exercise',
-                      'WearsSeatBelt', 'FeltNervous', 'HoldHealthInsurance', 'IsWorking', 'CurrentlySmoke']
+TREATMENTS_COLUMNS = ['Region', 'Race', 'Sex', 'Education',
+                      'IsHadHeartAttack',
+                      'IsDiagnosedAsthma', 'IsBornInUSA', 'LongSinceLastFluVaccination', 'TakesAspirinFrequently',
+                      'WearsSeatBelt', 'HoldHealthInsurance']
 
 
 TREATMENTS = [{"att": "DoesDoctorRecommendExercise", "value": 1}, {"att": "DoesDoctorRecommendExercise", "value": 2}, {"att": "LongSinceLastFluVaccination", "value": 1},
@@ -91,4 +91,4 @@ TREATMENTS = [{"att": "DoesDoctorRecommendExercise", "value": 1}, {"att": "DoesD
               {"att": "IsOverWeight", "value": 1},{"att": "IsObesity", "value": 1},{"att": "Region", "value": 1}, {"att": "Region", "value": 2},
               {"att": "Region", "value": 3}, {"att": "Region", "value": 4}]
 
-OUTCOME_COLUMN = "IsDiagnosedCancer"
+OUTCOME_COLUMN = "Exercise"

@@ -8,13 +8,13 @@ from tqdm import tqdm
 from Utils import getTreatmentCATE
 
 K = 5
-LAMDA_VALUES = [0.0001, 0.00005, 0.0000001]
+LAMDA_VALUES = [0.0001, 0.00005, 0.001]
 CALCED_INTERSECTIONS = {}
 
 
 def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means, OUTCOME_COLUMN, graph, cols_dict):
-    ate1 = getTreatmentCATE(group1, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
-    ate2 = getTreatmentCATE(group2, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
+    ate1, graph_dict = getTreatmentCATE(group1, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
+    ate2, graph_dict = getTreatmentCATE(group2, graph, treatment_d, OUTCOME_COLUMN, cols_dict, graph_dict)
     # getTreatmentCATE(df_group1, graph, t, output_att, cols_dict)
     if ate1 and ate2:
         iscore = abs(ate1 - ate2)
@@ -46,7 +46,7 @@ def parse_treatment(input_str):
     for t in treats:
         val = convert_value(t.split("_")[-1])
         value = lambda x, v=val: 1 if pd.notna(x) and x == v else 0
-        att = t.split("_")[0]
+        att = t.replace("_"+t.split("_")[-1], "")
         res_list.append({"att": att, "value": value, "val_specified": val})
     return res_list
 
@@ -159,7 +159,7 @@ def greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN):
 def find_group(df_clean, df_facts, PROJECT_DIRECTORY, OUTCOME_COLUMN):
     df_facts = df_facts.dropna()
     max_subpopulation = max(df_facts['size_itemset'])
-    df_facts = df_facts[(df_facts['size_group1']>49) & (df_facts['size_group2']>49)]
+    df_facts = df_facts[(df_facts['size_group1']>39) & (df_facts['size_group2']>39)]
     for lamda in [0.00009]:
         for alpha in [0.5]:
             group, scores = greedy(df_clean, df_facts, max_subpopulation, alpha, lamda, OUTCOME_COLUMN)

@@ -1,12 +1,61 @@
 itemset,treatment
-"frozenset({'RaceEthnicity=White or of European descent', 'Age=18 - 24 years old'})",FormalEducation_Associate degree
-"frozenset({'Student=No', 'UndergradMajor=Computer science, computer engineering, or software engineering', 'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",WakeTime_Between 5:00 - 6:00 AM
-frozenset({'Student=No'}),DevType_Embeddedapplicationsordevicesdeveloper_0
-"frozenset({'UndergradMajor=Computer science, computer engineering, or software engineering', 'Age=25 - 34 years old'})",DevType_Full-stackdeveloper_0
-frozenset({'RaceEthnicity=White or of European descent'}),DevType_Embeddedapplicationsordevicesdeveloper_0
-"frozenset({'Student=No', 'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",DevType_Databaseadministrator_0
-"frozenset({'RaceEthnicity=White or of European descent', 'Age=25 - 34 years old'})",DevType_Dataorbusinessanalyst_0
-"frozenset({'RaceEthnicity=White or of European descent', 'Student=No'})",DevType_Embeddedapplicationsordevicesdeveloper_0
-"frozenset({'RaceEthnicity=White or of European descent', 'Country=United States'})",DevType_Embeddedapplicationsordevicesdeveloper_0
-"frozenset({'Student=No', 'Country=United States'})",DevType_Embeddedapplicationsordevicesdeveloper_0
-"frozenset({'Country=United States', 'Age=25 - 34 years old'})",YearsCodingProf_0-2 years
+"frozenset({'Exercise=3 - 4 times per week', 'Hobby=Yes', 'Student=No'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Gender=Male', 'Hobby=Yes', 'Exercise=3 - 4 times per week'})",Country_United States
+"frozenset({'Student=Yes, full-time'})",Country_United States+Age_25 - 34 years old
+"frozenset({'Gender=Male', 'Student=No', 'Exercise=3 - 4 times per week'})",Country_United States
+"frozenset({'Exercise=3 - 4 times per week', 'Hobby=Yes'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Gender=Male', 'Exercise=3 - 4 times per week'})",Country_United States
+"frozenset({'Hobby=Yes', 'Student=Yes, full-time'})",Country_United States+Age_25 - 34 years old
+"frozenset({'Exercise=3 - 4 times per week', 'Student=No'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'LastNewJob=Less than a year ago', 'Hobby=Yes'})",Age_55 - 64 years old
+"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Hobby=Yes'})",Age_55 - 64 years old
+frozenset({'Exercise=3 - 4 times per week'}),Country_United States
+"frozenset({'LastNewJob=Less than a year ago', 'Hobby=Yes', 'Student=No'})",Age_55 - 64 years old
+frozenset({'LastNewJob=Less than a year ago'}),Age_55 - 64 years old
+"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago'})",Age_55 - 64 years old
+"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Hobby=Yes', 'Student=No'})",Age_55 - 64 years old
+"frozenset({'LastNewJob=Less than a year ago', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Student=No'})",Country_United States
+"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes'})",RaceEthnicity_WhiteorofEuropeandescent_1
+frozenset({'Hobby=Yes'}),Age_55 - 64 years old+WakeTime_Between 6:01 - 7:00 AM
+"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_0
+"frozenset({'Gender=Male', 'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes'})",DevType_Databaseadministrator_0
+frozenset({'LastNewJob=Between 2 and 4 years ago'}),RaceEthnicity_WhiteorofEuropeandescent_1
+frozenset({'Hobby=No'}),RaceEthnicity_EastAsian_0
+"frozenset({'Gender=Male', 'Hobby=No'})",DevType_Front-enddeveloper_0
+"frozenset({'Hobby=Yes', 'Student=No'})",Age_25 - 34 years old+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_0
+frozenset({'Gender=Male'}),Country_United States
+frozenset({'Student=No'}),Age_55 - 64 years old+DevType_Databaseadministrator_1
+"frozenset({'Gender=Male', 'Hobby=Yes'})",Country_United States
+"frozenset({""Exercise=I don't typically exercise""})",RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({""Exercise=I don't typically exercise"", 'Hobby=Yes'})",RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Gender=Male', ""Exercise=I don't typically exercise"", 'Hobby=Yes'})",Country_United States
+"frozenset({'Gender=Male', ""Exercise=I don't typically exercise""})",RaceEthnicity_EastAsian_0
+frozenset({'Exercise=Daily or almost every day'}),Country_United States
+"frozenset({""Exercise=I don't typically exercise"", 'Hobby=Yes', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Hobby=No', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'Hobby=Yes', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'Hobby=No', 'Student=No'})",Country_United States
+frozenset({'LastNewJob=Between 1 and 2 years ago'}),Country_United States
+"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'Exercise=1 - 2 times per week'})",Country_United States
+frozenset({'LastNewJob=More than 4 years ago'}),Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+frozenset({'Exercise=1 - 2 times per week'}),Country_United States
+"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes'})",Country_United States
+"frozenset({'Gender=Male', 'LastNewJob=More than 4 years ago'})",Country_United States
+"frozenset({'Gender=Male', 'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States
+"frozenset({'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
+"frozenset({'Hobby=Yes', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes', 'Student=No'})",Country_United States
+"frozenset({'Gender=Male', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
+"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago'})",Country_United States
+"frozenset({'Hobby=Yes', 'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
+"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes'})",Country_United States
+"frozenset({'Gender=Male', 'Student=No', 'Exercise=1 - 2 times per week'})",Country_United States
+"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago', 'Student=No'})",Country_United States
+"frozenset({'Student=No', 'Exercise=1 - 2 times per week'})",Country_United States
+"frozenset({'Student=No', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
+"frozenset({'Gender=Male', 'Student=No', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States

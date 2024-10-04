@@ -1,8 +1,8 @@
 import pandas as pd
 import numpy as np
 from time import time
-from Tal.clean_meps import build_mini_df, SUBPOPULATIONS, create_value_dict, OUTCOME_COLUMN, TREATMENTS_COLUMNS
-#from Tal.clean_so import build_mini_df, SUBPOPULATIONS, create_value_dict, OUTCOME_COLUMN, TREATMENTS_COLUMNS
+#from Tal.clean_meps import build_mini_df, SUBPOPULATIONS, create_value_dict, OUTCOME_COLUMN, TREATMENTS_COLUMNS
+from Tal.clean_so import build_mini_df, SUBPOPULATIONS, create_value_dict, OUTCOME_COLUMN, TREATMENTS_COLUMNS
 from algorithms.divexplorer.divexplorer import DivergenceExplorer
 from algorithms.final_algorithm.find_best_treatment import find_best_treatment
 from algorithms.final_algorithm.new_greedy import find_group, calc_facts_metrics
@@ -15,8 +15,8 @@ import networkx as nx
 warnings.filterwarnings("ignore")
 
 PRECENT_CLEANING_THRESHOLD = 0.5
-DIVEXPLORER_THRESHOLD_SUPPORT = 0.5
-PROJECT_DIRECTORY = "meps"
+DIVEXPLORER_THRESHOLD_SUPPORT = 0.1
+PROJECT_DIRECTORY = "so"
 K = 5
 LAMDA_VALUES = [0.0001, 0.00005, 0.00009]
 CALCED_INTERSECTIONS = {}
@@ -51,7 +51,7 @@ def clean_treatments(df, GRAPH, OUTCOME_COLUMN, TREATMENTS, cols_dict):
 
 def algorithm():
     df_clean, cols_dict = build_mini_df()
-    """df_clean.to_csv(f"outputs/{PROJECT_DIRECTORY}/clean_data.csv", index=False)
+    df_clean.to_csv(f"outputs/{PROJECT_DIRECTORY}/clean_data.csv", index=False)
     # step 1 - get best subpopulation by divexplorer
     df_clean = pd.read_csv(f"outputs/{PROJECT_DIRECTORY}/clean_data.csv")
     fp_diver = DivergenceExplorer(df_clean)
@@ -61,15 +61,14 @@ def algorithm():
         .sort_values(by=f"{OUTCOME_COLUMN}_div", ascending=False, ignore_index=True)
     subgroups = subgroups.dropna()
     subgroups.to_csv(f"outputs/{PROJECT_DIRECTORY}/interesting_subpopulations.csv", index=False)
-
     # step 2 - find the best treatment for each subpopulation
     df_clean = pd.read_csv(f"outputs/{PROJECT_DIRECTORY}/clean_data.csv")
     subgroups = pd.read_csv(f"outputs/{PROJECT_DIRECTORY}/interesting_subpopulations.csv")
     intresting_subpopulations = list(subgroups['itemset'])
-    r_dict = []"""
+    r_dict = []
     with open(f"data/{PROJECT_DIRECTORY}/causal_dag.txt", "r") as f:
         GRAPH = f.readlines()
-    """TREATMENTS_COLUMNS = list(df_clean.columns)
+    TREATMENTS_COLUMNS = list(df_clean.columns)
     for att in SUBPOPULATIONS:
         TREATMENTS_COLUMNS.remove(att)
     TREATMENTS_COLUMNS.remove('group1')
@@ -77,8 +76,9 @@ def algorithm():
     TREATMENTS_COLUMNS.remove(OUTCOME_COLUMN)
     treatments = create_value_dict(df_clean, TREATMENTS_COLUMNS)
     c_treatments = clean_treatments(df_clean, GRAPH, OUTCOME_COLUMN, treatments, cols_dict)
+    calced_graphs = {}
     for itemset in tqdm(intresting_subpopulations, total=len(intresting_subpopulations)):
-        r = find_best_treatment(df=df_clean, item_set=itemset, output_att=OUTCOME_COLUMN, treatments=c_treatments, graph=GRAPH, cols_dict=cols_dict, graph_dict=CALCED_GRAPHS)
+        r, calced_graphs = find_best_treatment(df=df_clean, item_set=itemset, output_att=OUTCOME_COLUMN, treatments=c_treatments, graph=GRAPH, cols_dict=cols_dict, graph_dict=calced_graphs)
         if not r:
             continue
         r_dict.append({"itemset": itemset, "treatment": r})
