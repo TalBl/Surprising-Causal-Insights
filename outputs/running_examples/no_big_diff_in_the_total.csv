@@ -1,0 +1,122 @@
+subpopulation,treatment,iscore,ni_score,support,size_want_stay_same_pos,size_want_eng_manager,diff_avg_salaries
+All,[],,,1,13458,6793,6077.317488
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '55 - 64 years old'}",[{'Student': 'No'}],2340375.033,1,0.004888647,91,8,2898750.066
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Gender': 'Male', 'Age': '55 - 64 years old'}",[{'Student': 'No'}],2275425,1,0.005234309,96,10,2808450
+"{'Country': 'United States', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Age': '55 - 64 years old'}",[{'Student': 'No'}],1785183.673,1,0.005678732,98,17,2685190.876
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Age': '55 - 64 years old'}",[{'Student': 'No'}],2188164.706,1,0.005579971,102,11,2648329.412
+"{'Country': 'United States', 'FormalEducation': 'Other doctoral degree (Ph.D, Ed.D., etc.)', 'Gender': 'Male'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],10138943.42,1,0.006616957,99,35,2527603.232
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United States', 'Age': '55 - 64 years old'}",[{'Student': 'No'}],1680339.623,1,0.006221915,106,20,2489479.245
+"{'Country': 'United States', 'RaceEthnicity_HispanicorLatino/Latina': 1.0, 'Age': '25 - 34 years old', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],9597338.413,1,0.004296084,44,43,2137341.564
+"{'Country': 'United States', 'FormalEducation': 'Other doctoral degree (Ph.D, Ed.D., etc.)'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],7343362.949,1,0.009234112,138,49,2097218.17
+"{'RaceEthnicity_HispanicorLatino/Latina': 1.0, 'Age': '25 - 34 years old', 'Country': 'United States'}",[{'YearsCodingProf': '6-8 years'}],9830136.961,1,0.004641746,46,48,2068077.971
+"{'Age': '35 - 44 years old', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Female'}",[{'YearsCodingProf': '3-5 years'}],6469519.889,1,0.007308281,109,39,1575246.6
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'Australia', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],2641738.4,1,0.004444225,56,34,1178203.277
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United States', 'Age': '35 - 44 years old', 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '9-11 years'}],3633781.134,1,0.011159943,149,77,1073033.191
+"{'FormalEducation': 'Some college/university study without earning a degree', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Age': '45 - 54 years old'}","[{'LastNewJob': 'Less than a year ago'}, {'YearsCodingProf': '21-23 years'}]",6775410.667,1,0.007900844,133,27,1026593.444
+"{'Age': '35 - 44 years old', 'Country': 'United States', 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '9-11 years'}],2617644.604,1,0.013036393,165,99,985378.1818
+"{'Age': '35 - 44 years old', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United States', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '9-11 years'}],3312467.849,1,0.01249321,166,87,964784.919
+{'FormalEducation': 'I never completed any formal education'},[{'YearsCodingProf': '3-5 years'}],3454617.707,1,0.00538245,90,19,917223.5181
+"{'Age': '35 - 44 years old', 'Country': 'United States', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '9-11 years'}],2558110.073,1,0.014665942,184,113,886510.5906
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'Australia', 'Age': '25 - 34 years old', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],1785283.839,1,0.005579971,66,47,672896.4178
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '45 - 54 years old', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'LastNewJob': 'Less than a year ago'}],479312.8508,0.999931334,0.008394647,140,30,630878.1714
+"{'Age': '35 - 44 years old', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France', 'Gender': 'Male'}",[{'YearsCodingProf': '9-11 years'}],1348016.902,1,0.004345464,65,23,539927.4381
+"{'Age': '35 - 44 years old', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France'}",[{'YearsCodingProf': '9-11 years'}],1362700.649,1,0.004444225,67,23,515933.2797
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'Gender': 'Male', 'Country': 'Italy'}",[{'YearsCodingProf': '6-8 years'}],936184.4453,0.999999993,0.004839267,43,55,463621.3412
+{'Country': 'South Africa'},[{'WakeTime': 'Between 6:01 - 7:00 AM'}],1679055.931,1,0.00538245,71,38,451959.2646
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male', 'Age': '18 - 24 years old'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],772310.1669,0.999999804,0.017283097,261,89,451199.192
+"{'Gender': 'Male', 'Country': 'South Africa'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],1794849.429,1,0.004098563,60,23,451127.687
+"{'Age': '25 - 34 years old', 'Gender': 'Male', 'Country': 'Italy'}",[{'YearsCodingProf': '6-8 years'}],748963.6468,0.999999688,0.005184929,46,59,435718.0251
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Denmark'}",[{'YearsCodingProf': '9-11 years'}],1847313.682,1,0.006666337,99,36,416056.8485
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Denmark', 'Gender': 'Male'}",[{'YearsCodingProf': '9-11 years'}],1875908.906,1,0.006419436,94,36,398307.3191
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Age': '18 - 24 years old'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],480430.0362,0.999932851,0.018962027,285,99,392224.1625
+"{'Country': 'Denmark', 'Gender': 'Male'}",[{'YearsCodingProf': '9-11 years'}],1887791.453,1,0.006765098,98,39,376619.7928
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Sweden'}",[{'YearsCodingProf': '9-11 years'}],267621.0212,0.995263328,0.010024196,158,45,333966.5924
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Country': 'Sweden'}",[{'YearsCodingProf': '9-11 years'}],289379.0271,0.99693461,0.009727915,153,44,317824.9697
+"{'Age': '25 - 34 years old', 'Gender': 'Male', 'RaceEthnicity_EastAsian': 1.0, 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],271735.8906,0.995637534,0.004197324,38,47,312552.1702
+{'Country': 'Denmark'},[{'YearsCodingProf': '9-11 years'}],1613879.378,1,0.008493408,125,47,308016.7762
+"{'Gender': 'Male', 'Country': 'Sweden'}",[{'YearsCodingProf': '9-11 years'}],246904.8722,0.992831777,0.01066614,171,45,291231.1298
+{'Country': 'Italy'},[{'LastNewJob': 'Between 2 and 4 years ago'}],130337.6845,0.926226352,0.017085576,181,165,270449.7047
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],207560.9853,0.9842548,0.012987013,186,77,231758.8236
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France', 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],359832.3208,0.999250906,0.012196929,173,74,225194.9133
+"{'Country': 'France', 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],469016.3457,0.999915632,0.013579576,191,84,218816.015
+"{'Gender': 'Male', 'Country': 'Italy'}",[{'YearsCodingProf': '6-8 years'}],511682.4063,0.99996406,0.013036393,130,134,200050.2227
+"{'Country': 'Germany', 'Gender': 'Male', 'Age': '18 - 24 years old'}",[{'Student': 'No'}],360584.7842,0.999262095,0.010024196,151,52,195446.8181
+"{'Country': 'France', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],531431.8933,0.999975787,0.017579379,245,111,189717.2739
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],56626.06999,0.677780214,0.020937238,309,115,188935.9453
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'France', 'Gender': 'Male'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],129309.7039,0.924693895,0.01955459,286,110,188192.0224
+{'Country': 'France'},[{'WakeTime': 'Between 6:01 - 7:00 AM'}],208833.9895,0.984650614,0.028887462,416,169,186444.429
+"{'Country': 'France', 'Gender': 'Male'}",[{'WakeTime': 'Between 6:01 - 7:00 AM'}],189195.3964,0.977266324,0.022270505,326,125,179060.3544
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Age': '18 - 24 years old'}","[{'LastNewJob': 'More than 4 years ago'}, {'Student': 'No'}]",352823.1231,0.999138179,0.009332872,140,49,169862.8653
+"{'Age': '25 - 34 years old', 'RaceEthnicity_EastAsian': 1.0, 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],385587.8917,0.999552466,0.004888647,48,51,162086.098
+"{'FormalEducation': 'Primary/elementary school', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],745385.3939,0.999999665,0.008690929,137,39,137463.8503
+"{'Country': 'Germany', 'Age': '18 - 24 years old'}",[{'Student': 'No'}],152982.9683,0.953096331,0.01071552,162,55,130897.7158
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '18 - 24 years old'}",[{'Student': 'No'}],76828.49258,0.784882277,0.009974816,150,52,102058.0554
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Country': 'Portugal'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],558253.9569,0.99998584,0.004839267,64,34,76059.26471
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Portugal'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],558319.4618,0.999985858,0.004987408,67,34,72745.85426
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],226707.6866,0.989264011,0.008789689,144,34,48042.38889
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],133402.702,0.930612881,0.004246704,67,19,42812.63786
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Age': '25 - 34 years old', 'Gender': 'Male', 'Country': 'Germany'}",[{'YearsCodingProf': '12-14 years'}],1037659.614,0.999999999,0.008048985,102,61,42424.70203
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Age': '25 - 34 years old', 'Country': 'Germany'}",[{'YearsCodingProf': '12-14 years'}],1036346.676,0.999999999,0.008740309,110,67,41826.86567
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],130218.5185,0.926050317,0.004542986,71,21,40847.01811
+"{'Country': 'Brazil', 'Age': '18 - 24 years old'}",[{'Hobby': 'No'}],141150.3613,0.940573037,0.004641746,54,40,34980.35556
+"{'Country': 'Brazil', 'Gender': 'Male', 'Age': '18 - 24 years old'}",[{'Hobby': 'No'}],217483.4846,0.987088923,0.004394845,51,38,34381.72136
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'Country': 'Germany'}",[{'YearsCodingProf': '12-14 years'}],1046202.999,0.999999999,0.008048985,103,60,30742.57087
+"{'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],82526.33077,0.808051201,0.006518197,106,26,26026.06096
+"{'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],81690.96296,0.804817305,0.006814478,110,28,25404.17662
+"{'FormalEducation': 'Some college/university study without earning a degree', 'Country': 'Russian Federation'}",[{'YearsCodingProf': '6-8 years'}],110403.1804,0.890086722,0.004444225,65,25,24593.67385
+"{'Country': 'Poland', 'Age': '25 - 34 years old', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '3-5 years'}],14529.32746,0.252175197,0.006221915,78,48,14627.53846
+"{'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Germany', 'Gender': 'Male', 'Age': '18 - 24 years old'}",[{'Hobby': 'Yes'}],35014.36453,0.50355734,0.004197324,62,23,8989.105189
+"{'Country': 'Germany', 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male', 'Age': '18 - 24 years old'}",[{'YearsCodingProf': '0-2 years'}],34563.41984,0.499059725,0.004592366,68,25,4709.609412
+"{'RaceEthnicity_HispanicorLatino/Latina': 1.0, 'Country': 'Brazil'}",[{'YearsCodingProf': '0-2 years'}],17961.31989,0.301783741,0.005826873,80,38,-1596.368421
+"{'Gender': 'Male', 'Country': 'Belgium'}",[{'YearsCodingProf': '15-17 years'}],647960.8826,0.999997646,0.007357661,109,40,-7855.236697
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Belgium'}",[{'YearsCodingProf': '15-17 years'}],642794.3115,0.999997389,0.00711076,105,39,-12812.92894
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Country': 'Belgium'}",[{'YearsCodingProf': '15-17 years'}],639941.2604,0.999997236,0.00706138,104,39,-15232.10256
+"{'Country': 'Iran, Islamic Republic of...'}",[{'YearsCodingProf': '15-17 years'}],66458.4,0.735302602,0.00538245,64,45,-15558.81667
+"{'Country': 'United Kingdom', 'Gender': 'Male'}",[{'WakeTime': 'Between 7:01 - 8:00 AM'}],884834.2002,0.999999979,0.065083206,958,360,-24061.03122
+{'Country': 'Belgium'},[{'YearsCodingProf': '15-17 years'}],724177.9048,0.999999487,0.008740309,134,43,-29542.2395
+"{'Gender': 'Male', 'Age': 'Under 18 years old'}",[{'LastNewJob': 'Less than a year ago'}],118828.1386,0.907130758,0.012690731,210,47,-44621.85046
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'Country': 'Russian Federation'}",[{'Hobby': 'No'}],53391.32546,0.656245146,0.019307689,263,128,-47141.89663
+"{'Gender': 'Male', 'Country': 'Russian Federation'}",[{'Hobby': 'No'}],43430.25925,0.580463683,0.020690336,286,133,-51302.84494
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Russian Federation'}",[{'Hobby': 'No'}],69783.59194,0.752333412,0.020492815,285,130,-51646.30823
+"{'Country': 'United Kingdom', 'Age': '35 - 44 years old', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '18-20 years'}],2377927.582,1,0.004246704,67,19,-64815.17675
+{'Country': 'Portugal'},[{'YearsCodingProf': '9-11 years'}],723303.2044,0.999999478,0.006814478,86,52,-67931.54919
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Ukraine', 'Gender': 'Male'}",[{'YearsCodingProf': '9-11 years'}],12238.30435,0.217112356,0.006172535,73,52,-69161.65227
+"{'Gender': 'Male', 'Country': 'Portugal'}",[{'YearsCodingProf': '9-11 years'}],838628.9666,0.999999948,0.00538245,70,39,-110857.6352
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Age': '25 - 34 years old', 'RaceEthnicity_MiddleEastern': 1.0}",[{'WakeTime': 'Between 7:01 - 8:00 AM'}],329089.1803,0.998614624,0.007011999,78,64,-119908.7372
+"{'Country': 'United Kingdom', 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '18-20 years'}],1965190.637,1,0.013628957,182,94,-121657.7713
+"{'Country': 'Germany', 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Age': '18 - 24 years old'}",[{'Student': 'No'}],513416.8804,0.999965285,0.004888647,72,27,-127790.2222
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Age': '18 - 24 years old'}",[{'Student': 'No'}],526723.7326,0.999973397,0.004493605,66,25,-134410.1624
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Age': '25 - 34 years old', 'Gender': 'Male', 'RaceEthnicity_MiddleEastern': 1.0}",[{'WakeTime': 'Between 7:01 - 8:00 AM'}],389256.6779,0.999584128,0.006419436,72,58,-150827.5479
+"{'Age': '35 - 44 years old', 'FormalEducation': 'Other doctoral degree (Ph.D, Ed.D., etc.)'}",[{'WakeTime': 'Between 8:01 - 9:00 AM'}],1204995.965,1,0.009826675,142,57,-151475.8132
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '18-20 years'}],2277318.95,1,0.013777097,185,94,-153610.8941
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",[{'LastNewJob': 'Between 1 and 2 years ago'}],1641521.443,1,0.274356822,3808,1748,-161223.8174
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'FormalEducation': 'Master’s degree (MA, MS, M.Eng., MBA, etc.)'}",[{'YearsCodingProf': '18-20 years'}],1911887.733,1,0.012641351,170,86,-172832.7803
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],1789846.367,1,0.251691275,3502,1595,-218434.9746
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'Israel'}",[{'Student': 'No'}],338190.9954,0.998845191,0.005925633,70,50,-234347.2457
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Some college/university study without earning a degree'}",[{'YearsCodingProf': '9-11 years'}],1157086.297,1,0.006666337,102,33,-241653.8966
+"{'Age': '35 - 44 years old', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Other doctoral degree (Ph.D, Ed.D., etc.)'}",[{'WakeTime': 'Between 8:01 - 9:00 AM'}],780443.1933,0.999999834,0.007851464,115,44,-247181.1605
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'YearsCodingProf': '9-11 years'}],1148555.13,1,0.006370056,98,31,-271519.713
+"{'Country': 'Germany', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'YearsCodingProf': '9-11 years'}],1378829.091,1,0.008740309,129,48,-283472.6434
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United States'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],3720388.745,1,0.124339539,1721,797,-288465.9816
+"{'FormalEducation': 'Associate degree', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",[{'YearsCodingProf': '0-2 years'}],1198392.351,1,0.022418646,344,110,-297569.1539
+"{'FormalEducation': 'Associate degree', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'YearsCodingProf': '0-2 years'}],1054200.442,0.999999999,0.020492815,313,102,-343208.4125
+"{'Country': 'United States', 'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],4202815.501,1,0.110809343,1531,713,-366241.2524
+"{'Country': 'United Kingdom', 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],3258989.208,1,0.005530591,94,18,-381535.4799
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'Brazil', 'Gender': 'Male'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],3080226.425,1,0.007258901,105,42,-385445.3333
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'Brazil'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],2114233.747,1,0.010122957,136,69,-390594.133
+"{'Country': 'Germany', 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'YearsCodingProf': '9-11 years'}],1576942.083,1,0.006962619,104,37,-393863.2037
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'Country': 'United States'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],2530131.848,1,0.167004099,2250,1132,-396415.7671
+"{'Age': '25 - 34 years old', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],3057374.968,1,0.037627771,493,269,-476257.9204
+"{'Age': '25 - 34 years old', 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'Hobby': 'No'}],1508769.868,1,0.035109377,457,254,-523207.6818
+"{'Country': 'United Kingdom', 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],3616214.632,1,0.004296084,73,14,-526207.4677
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'Hobby': 'No'}],1857802.078,1,0.031455237,415,222,-565158.0972
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'Hobby': 'No'}],1961649.845,1,0.029825688,393,211,-623899.6334
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],3387847.833,1,0.004394845,75,14,-729081.7676
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'FormalEducation': 'Secondary school (e.g. American high school, German Realschule or Gymnasium, etc.)', 'Gender': 'Male'}",[{'LastNewJob': 'Between 2 and 4 years ago'}],3472842.032,1,0.004098563,70,13,-733586.189
+"{'Age': '35 - 44 years old', 'Country': 'Australia'}",[{'WakeTime': 'Between 7:01 - 8:00 AM'}],2786109.583,1,0.005975014,80,41,-977879.161
+"{'Age': '25 - 34 years old', 'Country': 'United States', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],10290829.14,1,0.010468619,140,72,-1887198.273
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '25 - 34 years old', 'Country': 'United States', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],11424954.73,1,0.009085971,116,68,-1982558.88
+"{'Country': 'United States', 'Age': '25 - 34 years old', 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],11234405.09,1,0.009332872,123,66,-2056360.715
+"{'FormalEducation': 'Bachelor’s degree (BA, BS, B.Eng., etc.)', 'RaceEthnicity_EastAsian': 1.0}",[{'WakeTime': 'Between 8:01 - 9:00 AM'}],4648575.201,1,0.016986815,199,145,-2074062.78
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United States', 'Age': '25 - 34 years old', 'Gender': 'Male', 'FormalEducation': 'Some college/university study without earning a degree'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],12619333.17,1,0.008295887,106,62,-2176504.993
+"{'FormalEducation': 'Primary/elementary school', 'Age': 'Under 18 years old'}",[{'WakeTime': 'Between 7:01 - 8:00 AM'}],17201822.32,1,0.004444225,74,16,-3383569.189

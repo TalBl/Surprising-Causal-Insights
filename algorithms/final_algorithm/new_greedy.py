@@ -8,20 +8,20 @@ from tqdm import tqdm
 from Utils import getTreatmentCATE
 
 K = 5
-LAMDA_VALUES = [0.0001, 0.00005, 0.001]
+LAMDA_VALUE = 0.00002
 CALCED_INTERSECTIONS = {}
 
 
 def analyze_relation(data, group1, group2, itemset, treatment_d, size, size_group1, size_group2, support, std, diff_means, OUTCOME_COLUMN, graph, cols_dict):
-    ate1, graph_dict = getTreatmentCATE(group1, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
-    ate2, graph_dict = getTreatmentCATE(group2, graph, treatment_d, OUTCOME_COLUMN, cols_dict, graph_dict)
+    ate1 = getTreatmentCATE(group1, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
+    ate2 = getTreatmentCATE(group2, graph, treatment_d, OUTCOME_COLUMN, cols_dict)
     # getTreatmentCATE(df_group1, graph, t, output_att, cols_dict)
     if ate1 and ate2:
         iscore = abs(ate1 - ate2)
         return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
                 'iscore': iscore, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
-                "ni_score": ni_score(iscore, LAMDA_VALUES[2]),
-                "utility": ni_score(iscore, LAMDA_VALUES[2]), "std": std, "diff_means": diff_means}
+                "ni_score": ni_score(iscore, LAMDA_VALUE),
+                "utility": ni_score(iscore, LAMDA_VALUE), "std": std, "diff_means": diff_means}
     return {'itemset': itemset, 'treatment': treatment_d, 'ate1': ate1, 'ate2':ate2,
             'iscore': None, 'size_itemset': size, 'size_group1': size_group1, "size_group2": size_group2, "support": support,
             "ni_score": None, "utility": None, "std": std, "diff_means": diff_means}
@@ -51,20 +51,11 @@ def parse_treatment(input_str):
     return res_list
 
 
-def parse_itemset(itemset):
-    elements = ast.literal_eval(f"{{{itemset[11:-2]}}}")  # Use ast.literal_eval to safely parse the set
-    item_set = {}
-    for element in elements:
-        key, value = element.split('=')
-        item_set[key] = convert_value(value)
-    return item_set
-
-
 def calc_facts_metrics(data, meta_data, OUTCOME_COLUMN, graph, cols_dict, graph_dict=None):
     n = data.shape[0]
     results = []
     for idx, (itemset, treatment) in meta_data.iterrows():
-        item_set = parse_itemset(itemset)
+        item_set = ast.literal_eval(itemset)
         treatments_d = parse_treatment(treatment)
         population = data.copy()
         for key, value in item_set.items():

@@ -54,15 +54,13 @@ def getTreatmentCATE(df_g, DAG, treatment, target, cols_dict, graph_dict=None):
                 edges.append([line.split(" ->")[0].split("'")[1], line.split("-> ")[1].split(";'")[0]])
         causal_graph = nx.DiGraph()
         causal_graph.add_edges_from(edges)
-        if type(treatment) == dict:
-            graph_dict[cols_dict[treatment["att"]]] = causal_graph
     try:
         ATE, p_value = estimateATE(causal_graph, df_g, 'TempTreatment', target)
         if p_value > P_VAL:
-            return 0, graph_dict
+            return 0
     except Exception as e:
-        return 0, graph_dict
-    return ATE, graph_dict
+        return 0
+    return ATE
 
 
 def changeDAG(dag, randomTreatment, cols_dict):

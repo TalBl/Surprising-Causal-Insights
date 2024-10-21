@@ -1,0 +1,53 @@
+subpopulation,treatment,iscore,ni_score,support,size_men,size_women,diff_avg_diabetes
+All,[],,,1,4860,5860,-0.004641217
+{'Married': 5.0},"[{'DoesDoctorRecommendExercise': 1.0}, {'FeltNervous': 4.0}]",0.131383286,0.000131375,0.302425373,1580,1662,0.021592103
+"{'IsBornInUSA': 1.0, 'Married': 5.0}",[{'HoldHealthInsurance': 5.0}],0.144823955,0.000144813,0.242070896,1254,1341,0.01919406
+"{'Married': 5.0, 'IsDiagnosedAsthma': 2.0}",[{'TakesAspirinFrequently': 2.0}],0.069684756,6.97E-05,0.267630597,1429,1440,0.015005151
+"{'IsBornInUSA': 1.0, 'Married': 5.0, 'IsDiagnosedAsthma': 2.0}",[{'HoldHealthInsurance': 5.0}],0.135585436,0.000135576,0.20988806,1113,1137,0.011573465
+{'IsBornInUSA': 2.0},"[{'Education': 1.0}, {'HoldHealthInsurance': 4.0}]",0.082980749,8.30E-05,0.270149254,1338,1558,0.011118659
+{'Region': 4.0},[{'TakesAspirinFrequently': 2.0}],0.063389133,6.34E-05,0.258115672,1266,1501,0.005641315
+"{'IsBornInUSA': 2.0, 'IsDiagnosedAsthma': 2.0}",[{'HoldHealthInsurance': 4.0}],0.045831411,4.58E-05,0.257089552,1298,1458,0.004107829
+"{'Region': 4.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 5.0}, {'TakesAspirinFrequently': 1.0}]",0.156196309,0.000156184,0.235541045,1181,1344,-0.000674116
+{'Region': 2.0},"[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.103550332,0.000103545,0.202798507,985,1189,-0.004136053
+"{'Race': 1.0, 'IsWorking': 1.0}","[{'HoldHealthInsurance': 6.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.328078828,0.000328025,0.435074627,2448,2216,-0.005621623
+{'Race': 1.0},"[{'HoldHealthInsurance': 6.0}, {'Exercise': 2.0}]",0.145071985,0.000145061,0.705223881,3510,4050,-0.007350427
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 6.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.324835795,0.000324783,0.397481343,2282,1979,-0.0088692
+{'IsWorking': 1.0},"[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.158096704,0.000158084,0.611847015,3327,3232,-0.009645895
+{'IsBornInUSA': 1.0},"[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.135134463,0.000135125,0.729850746,3522,4302,-0.010465399
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.191767108,0.000191749,0.44011194,2285,2433,-0.01129995
+{'Region': 3.0},"[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.277115033,0.000277077,0.379011194,1818,2245,-0.011901279
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsBornInUSA': 1.0}","[{'HoldHealthInsurance': 5.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.085760212,8.58E-05,0.322947761,1747,1715,-0.012225539
+"{'IsWorking': 1.0, 'Region': 3.0}","[{'HoldHealthInsurance': 5.0}, {'TakesAspirinFrequently': 1.0}]",0.156029956,0.000156018,0.223600746,1188,1209,-0.012244028
+"{'IsBornInUSA': 1.0, 'Region': 3.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.30711575,0.000307069,0.28619403,1361,1707,-0.013075347
+{'IsDiagnosedAsthma': 2.0},"[{'HoldHealthInsurance': 5.0}, {'Exercise': 2.0}]",0.11729488,0.000117288,0.897108209,4494,5123,-0.013152809
+"{'Race': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 6.0}, {'Exercise': 2.0}]",0.178129894,0.000178114,0.636660448,3251,3574,-0.013871071
+"{'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'TakesAspirinFrequently': 1.0}, {'Exercise': 2.0}]",0.112436946,0.000112431,0.555970149,3097,2863,-0.01432053
+"{'Race': 1.0, 'IsBornInUSA': 1.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.157564437,0.000157552,0.525466418,2613,3020,-0.015765797
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",[{'HoldHealthInsurance': 4.0}],0.09514269,9.51E-05,0.288899254,1596,1501,-0.017274198
+"{'Married': 1.0, 'Race': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.099491136,9.95E-05,0.219309701,1317,1034,-0.018102804
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.091600029,9.16E-05,0.390485075,2083,2103,-0.018283325
+"{'Race': 1.0, 'IsWorking': 1.0, 'Married': 1.0}","[{'TakesAspirinFrequently': 1.0}, {'Exercise': 2.0}]",0.123702792,0.000123695,0.237406716,1397,1148,-0.019385742
+"{'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.164131193,0.000164118,0.640018657,3196,3665,-0.020078987
+"{'IsWorking': 1.0, 'Region': 3.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 5.0}, {'TakesAspirinFrequently': 1.0}]",0.198515304,0.000198496,0.204757463,1114,1081,-0.020496017
+"{'Race': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.180970645,0.000180954,0.46511194,2378,2608,-0.022691711
+"{'Region': 3.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.271622505,0.000271586,0.340951493,1691,1964,-0.026708127
+"{'Married': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'TakesAspirinFrequently': 1.0}, {'Exercise': 2.0}]",0.142427682,0.000142418,0.291977612,1743,1387,-0.028923191
+"{'IsDiagnosedAsthma': 2.0, 'IsBornInUSA': 1.0, 'Region': 3.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.307032877,0.000306986,0.251026119,1244,1447,-0.029057791
+"{'Race': 1.0, 'Region': 3.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.274515044,0.000274477,0.243470149,1218,1392,-0.029454023
+"{'IsWorking': 1.0, 'Married': 1.0}","[{'TakesAspirinFrequently': 1.0}, {'Exercise': 2.0}]",0.140947742,0.000140938,0.315485075,1845,1537,-0.029897752
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'Married': 1.0}","[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.095286881,9.53E-05,0.212126866,1185,1089,-0.037135451
+"{'Race': 1.0, 'Married': 1.0}","[{'HoldHealthInsurance': 5.0}, {'FeltNervous': 4.0}]",0.462658901,0.000462552,0.36744403,1920,2019,-0.037843611
+"{'Race': 1.0, 'Married': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 6.0}, {'Exercise': 2.0}]",0.188977608,0.00018896,0.336567164,1799,1809,-0.038321148
+"{'Race': 1.0, 'Region': 3.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 6.0}, {'FeltNervous': 2.0}]",0.376136007,0.000376065,0.221268657,1133,1239,-0.03914554
+"{'IsBornInUSA': 1.0, 'IsWorking': 4.0}","[{'TakesAspirinFrequently': 1.0}, {'FeltNervous': 2.0}]",0.126396905,0.000126389,0.260914179,1099,1698,-0.039293136
+{'IsWorking': 4.0},"[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.055108183,5.51E-05,0.348227612,1347,2386,-0.043109988
+{'Married': 1.0},"[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.093901535,9.39E-05,0.487779851,2550,2679,-0.044668555
+"{'Married': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.112610599,0.000112604,0.448227612,2399,2406,-0.046546999
+"{'Race': 1.0, 'IsBornInUSA': 1.0, 'Married': 1.0}","[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.080546852,8.05E-05,0.266324627,1383,1472,-0.05042598
+"{'Race': 1.0, 'Married': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'TakesAspirinFrequently': 1.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.098601447,9.86E-05,0.238899254,1276,1285,-0.052294988
+"{'IsBornInUSA': 1.0, 'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.147681128,0.00014767,0.224160448,987,1416,-0.053069136
+"{'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}",[{'TakesAspirinFrequently': 1.0}],0.065271921,6.53E-05,0.305317164,1225,2048,-0.05699418
+"{'IsBornInUSA': 1.0, 'Married': 1.0}","[{'HoldHealthInsurance': 4.0}, {'Exercise': 2.0}]",0.13295802,0.000132949,0.327798507,1708,1806,-0.06053138
+"{'Race': 1.0, 'IsWorking': 4.0}","[{'HoldHealthInsurance': 6.0}, {'Exercise': 2.0}]",0.099619259,9.96E-05,0.243283582,933,1675,-0.06198717
+"{'Married': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 4.0}, {'DoesDoctorRecommendExercise': 1.0}]",0.197892053,0.000197872,0.294496269,1582,1575,-0.063447113
+"{'Race': 1.0, 'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}","[{'HoldHealthInsurance': 6.0}, {'Exercise': 2.0}]",0.131966268,0.000131958,0.21483209,849,1454,-0.071118542

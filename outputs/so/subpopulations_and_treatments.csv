@@ -1,61 +1,38 @@
 itemset,treatment
-"frozenset({'Exercise=3 - 4 times per week', 'Hobby=Yes', 'Student=No'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Gender=Male', 'Hobby=Yes', 'Exercise=3 - 4 times per week'})",Country_United States
-"frozenset({'Student=Yes, full-time'})",Country_United States+Age_25 - 34 years old
-"frozenset({'Gender=Male', 'Student=No', 'Exercise=3 - 4 times per week'})",Country_United States
-"frozenset({'Exercise=3 - 4 times per week', 'Hobby=Yes'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Gender=Male', 'Exercise=3 - 4 times per week'})",Country_United States
-"frozenset({'Hobby=Yes', 'Student=Yes, full-time'})",Country_United States+Age_25 - 34 years old
-"frozenset({'Exercise=3 - 4 times per week', 'Student=No'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'LastNewJob=Less than a year ago', 'Hobby=Yes'})",Age_55 - 64 years old
-"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Hobby=Yes'})",Age_55 - 64 years old
-frozenset({'Exercise=3 - 4 times per week'}),Country_United States
-"frozenset({'LastNewJob=Less than a year ago', 'Hobby=Yes', 'Student=No'})",Age_55 - 64 years old
-frozenset({'LastNewJob=Less than a year ago'}),Age_55 - 64 years old
-"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago'})",Age_55 - 64 years old
-"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Hobby=Yes', 'Student=No'})",Age_55 - 64 years old
-"frozenset({'LastNewJob=Less than a year ago', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'LastNewJob=Less than a year ago', 'Student=No'})",Country_United States
-"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes'})",RaceEthnicity_WhiteorofEuropeandescent_1
-frozenset({'Hobby=Yes'}),Age_55 - 64 years old+WakeTime_Between 6:01 - 7:00 AM
-"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_0
-"frozenset({'Gender=Male', 'LastNewJob=Between 2 and 4 years ago', 'Hobby=Yes'})",DevType_Databaseadministrator_0
-frozenset({'LastNewJob=Between 2 and 4 years ago'}),RaceEthnicity_WhiteorofEuropeandescent_1
-frozenset({'Hobby=No'}),RaceEthnicity_EastAsian_0
-"frozenset({'Gender=Male', 'Hobby=No'})",DevType_Front-enddeveloper_0
-"frozenset({'Hobby=Yes', 'Student=No'})",Age_25 - 34 years old+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'LastNewJob=Between 2 and 4 years ago', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_0
-frozenset({'Gender=Male'}),Country_United States
-frozenset({'Student=No'}),Age_55 - 64 years old+DevType_Databaseadministrator_1
-"frozenset({'Gender=Male', 'Hobby=Yes'})",Country_United States
-"frozenset({""Exercise=I don't typically exercise""})",RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({""Exercise=I don't typically exercise"", 'Hobby=Yes'})",RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Gender=Male', ""Exercise=I don't typically exercise"", 'Hobby=Yes'})",Country_United States
-"frozenset({'Gender=Male', ""Exercise=I don't typically exercise""})",RaceEthnicity_EastAsian_0
-frozenset({'Exercise=Daily or almost every day'}),Country_United States
-"frozenset({""Exercise=I don't typically exercise"", 'Hobby=Yes', 'Student=No'})",RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Hobby=No', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'Hobby=Yes', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'Hobby=No', 'Student=No'})",Country_United States
-frozenset({'LastNewJob=Between 1 and 2 years ago'}),Country_United States
-"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'Exercise=1 - 2 times per week'})",Country_United States
-frozenset({'LastNewJob=More than 4 years ago'}),Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-frozenset({'Exercise=1 - 2 times per week'}),Country_United States
-"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes'})",Country_United States
-"frozenset({'Gender=Male', 'LastNewJob=More than 4 years ago'})",Country_United States
-"frozenset({'Gender=Male', 'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States
-"frozenset({'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
-"frozenset({'Hobby=Yes', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes', 'Student=No'})",Country_United States
-"frozenset({'Gender=Male', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
-"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago'})",Country_United States
-"frozenset({'Hobby=Yes', 'Student=No', 'LastNewJob=More than 4 years ago'})",Country_United States+RaceEthnicity_WhiteorofEuropeandescent_1
-"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago', 'Hobby=Yes'})",Country_United States
-"frozenset({'Gender=Male', 'Student=No', 'Exercise=1 - 2 times per week'})",Country_United States
-"frozenset({'Gender=Male', 'LastNewJob=Between 1 and 2 years ago', 'Student=No'})",Country_United States
-"frozenset({'Student=No', 'Exercise=1 - 2 times per week'})",Country_United States
-"frozenset({'Student=No', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
-"frozenset({'Gender=Male', 'Student=No', 'Hobby=Yes', 'Exercise=1 - 2 times per week'})",Country_United States
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",Student_No
+{'RaceEthnicity_WhiteorofEuropeandescent': 1.0},Student_No
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Belgium', 'Gender': 'Male'}",YearsCodingProf_6-8 years
+"{'Country': 'Belgium', 'Gender': 'Male'}",YearsCodingProf_6-8 years
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Russian Federation', 'Age': '25 - 34 years old', 'Gender': 'Male'}",WakeTime_Between 5:00 - 6:00 AM
+{'Age': '35 - 44 years old'},YearsCodingProf_9-11 years
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Sweden'}",Student_No
+"{'Country': 'Russian Federation', 'Age': '25 - 34 years old', 'Gender': 'Male'}",WakeTime_Between 5:00 - 6:00 AM
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",LastNewJob_More than 4 years ago
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",Hobby_No
+"{'Country': 'Russian Federation', 'Age': '25 - 34 years old'}",LastNewJob_Less than a year ago
+{'Country': 'Sweden'},Student_No
+"{'Country': 'Germany', 'Gender': 'Male'}",LastNewJob_More than 4 years ago+WakeTime_Between 6:01 - 7:00 AM
+{'Country': 'Pakistan'},LastNewJob_Between 1 and 2 years ago
+{'Country': 'Germany'},LastNewJob_More than 4 years ago+WakeTime_Between 6:01 - 7:00 AM
+{'Country': 'Austria'},Student_No
+"{'Gender': 'Male', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Ukraine'}",LastNewJob_Between 1 and 2 years ago
+"{'Country': 'Iran, Islamic Republic of...'}","Student_Yes, full-time"
+"{'Country': 'Poland', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",YearsCodingProf_0-2 years
+{'Country': 'Philippines'},LastNewJob_Less than a year ago
+"{'Country': 'Poland', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",YearsCodingProf_0-2 years
+"{'Country': 'Poland', 'Gender': 'Male'}",YearsCodingProf_0-2 years
+{'Country': 'Mexico'},LastNewJob_Less than a year ago
+{'Country': 'Russian Federation'},LastNewJob_Less than a year ago
+{'Country': 'Poland'},YearsCodingProf_0-2 years
+{'Country': 'India'},LastNewJob_Between 2 and 4 years ago
+{'Country': 'Israel'},WakeTime_Between 6:01 - 7:00 AM
+{'Country': 'China'},YearsCodingProf_3-5 years+WakeTime_Between 6:01 - 7:00 AM
+"{'Gender': 'Male', 'Country': 'Ukraine'}",YearsCodingProf_0-2 years
+"{'Country': 'United States', 'Age': '35 - 44 years old', 'Gender': 'Male'}","Student_Yes, full-time"
+{'Country': 'United Kingdom'},LastNewJob_Less than a year ago
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United Kingdom'}",LastNewJob_Less than a year ago
+{'Country': 'Turkey'},YearsCodingProf_9-11 years
+{'Country': 'Denmark'},"Student_Yes, full-time"
+{'Country': 'Finland'},WakeTime_Between 6:01 - 7:00 AM
+"{'Country': 'United Kingdom', 'Age': '18 - 24 years old', 'Gender': 'Male'}",Hobby_No
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '18 - 24 years old', 'Gender': 'Male'}",Hobby_No

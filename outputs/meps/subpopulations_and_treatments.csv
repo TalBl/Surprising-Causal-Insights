@@ -1,22 +1,52 @@
 itemset,treatment
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'IsHadStroke=2.0', 'IsWorking=1.0'})",IsBornInUSA_1.0
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'IsWorking=1.0'})",IsBornInUSA_1.0
-"frozenset({'CurrentlySmoke=0', 'Married=1.0'})",Race_4
-"frozenset({'IsHadStroke=2.0', 'Married=1.0'})",Education_5.0
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'IsHadStroke=2.0', 'CurrentlySmoke=0'})",Race_3+Education_1.0
-frozenset({'Married=1.0'}),Education_3.0
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'IsHadStroke=2.0'})",Education_1.0
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'CurrentlySmoke=0'})",Race_3
-"frozenset({'IsHadStroke=2.0', 'CurrentlySmoke=0', 'IsWorking=1.0'})",IsBornInUSA_2.0
-"frozenset({'CurrentlySmoke=0', 'IsWorking=1.0'})",IsBornInUSA_1.0
-"frozenset({'IsHadStroke=2.0', 'IsWorking=1.0'})",IsBornInUSA_1.0
-frozenset({'IsWorking=1.0'}),IsBornInUSA_1.0
-frozenset({'DoesDoctorRecommendExercise=2.0'}),Education_1.0
-"frozenset({'CurrentlySmoke=0', 'IsHadStroke=2.0', 'IsWorking=4.0'})",IsBornInUSA_1.0
-"frozenset({'IsHadStroke=2.0', 'CurrentlySmoke=0'})",Sex_1
-"frozenset({'IsHadStroke=2.0', 'IsWorking=4.0'})",IsBornInUSA_1.0
-"frozenset({'DoesDoctorRecommendExercise=2.0', 'Married=5.0'})",Education_1.0
-"frozenset({'CurrentlySmoke=0', 'IsWorking=4.0'})",IsBornInUSA_1.0
-frozenset({'IsHadStroke=2.0'}),Sex_1
-frozenset({'CurrentlySmoke=0'}),Sex_1
-frozenset({'IsWorking=4.0'}),IsBornInUSA_1.0
+{'Married': 5.0},DoesDoctorRecommendExercise_1.0+FeltNervous_4.0
+"{'IsBornInUSA': 1.0, 'Married': 5.0}",HoldHealthInsurance_5
+"{'Married': 5.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_2.0
+"{'IsBornInUSA': 1.0, 'Married': 5.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_5
+{'IsBornInUSA': 2.0},Education_1.0+HoldHealthInsurance_4
+{'Region': 4.0},TakesAspirinFrequently_2.0
+"{'IsBornInUSA': 2.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4
+"{'Region': 4.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_5+TakesAspirinFrequently_1.0
+{'Region': 2.0},TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'IsWorking': 1.0}",HoldHealthInsurance_6+DoesDoctorRecommendExercise_1.0
+{'Race': 1.0},HoldHealthInsurance_6+Exercise_2.0
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_6+DoesDoctorRecommendExercise_1.0
+{'IsWorking': 1.0},HoldHealthInsurance_4+Exercise_2.0
+{'IsBornInUSA': 1.0},HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+{'Region': 3.0},HoldHealthInsurance_4+Exercise_2.0
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsBornInUSA': 1.0}",HoldHealthInsurance_5+DoesDoctorRecommendExercise_1.0
+"{'IsWorking': 1.0, 'Region': 3.0}",HoldHealthInsurance_5+TakesAspirinFrequently_1.0
+"{'IsBornInUSA': 1.0, 'Region': 3.0}",HoldHealthInsurance_4+Exercise_2.0
+{'IsDiagnosedAsthma': 2.0},HoldHealthInsurance_5+Exercise_2.0
+"{'Race': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_6+Exercise_2.0
+"{'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0+Exercise_2.0
+"{'Race': 1.0, 'IsBornInUSA': 1.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4
+"{'Married': 1.0, 'Race': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'IsWorking': 1.0, 'Married': 1.0}",TakesAspirinFrequently_1.0+Exercise_2.0
+"{'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'IsWorking': 1.0, 'Region': 3.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_5+TakesAspirinFrequently_1.0
+"{'Race': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'Region': 3.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+Exercise_2.0
+"{'Married': 1.0, 'IsWorking': 1.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0+Exercise_2.0
+"{'IsDiagnosedAsthma': 2.0, 'IsBornInUSA': 1.0, 'Region': 3.0}",HoldHealthInsurance_4+Exercise_2.0
+"{'Race': 1.0, 'Region': 3.0}",HoldHealthInsurance_4+Exercise_2.0
+"{'IsWorking': 1.0, 'Married': 1.0}",TakesAspirinFrequently_1.0+Exercise_2.0
+"{'IsWorking': 1.0, 'IsBornInUSA': 1.0, 'Married': 1.0}",TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'Married': 1.0}",HoldHealthInsurance_5+FeltNervous_4.0
+"{'Race': 1.0, 'Married': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_6+Exercise_2.0
+"{'Race': 1.0, 'Region': 3.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_6+FeltNervous_2.0
+"{'IsBornInUSA': 1.0, 'IsWorking': 4.0}",TakesAspirinFrequently_1.0+FeltNervous_2.0
+{'IsWorking': 4.0},HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+{'Married': 1.0},HoldHealthInsurance_4+Exercise_2.0
+"{'Married': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+Exercise_2.0
+"{'Race': 1.0, 'IsBornInUSA': 1.0, 'Married': 1.0}",TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'Married': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0+DoesDoctorRecommendExercise_1.0
+"{'IsBornInUSA': 1.0, 'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}",TakesAspirinFrequently_1.0
+"{'IsBornInUSA': 1.0, 'Married': 1.0}",HoldHealthInsurance_4+Exercise_2.0
+"{'Race': 1.0, 'IsWorking': 4.0}",HoldHealthInsurance_6+Exercise_2.0
+"{'Married': 1.0, 'IsBornInUSA': 1.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_4+DoesDoctorRecommendExercise_1.0
+"{'Race': 1.0, 'IsWorking': 4.0, 'IsDiagnosedAsthma': 2.0}",HoldHealthInsurance_6+Exercise_2.0

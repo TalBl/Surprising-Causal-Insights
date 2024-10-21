@@ -1,0 +1,39 @@
+subpopulation,treatment,iscore,ni_score,support,size_bachelor,size_master,diff_avg_salaries
+All,[],,,1,39747,19472,95535.78037
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'Student': 'No'}],298024.3693,0.997421345,0.405359766,15302,8703,348546.0761
+{'RaceEthnicity_WhiteorofEuropeandescent': 1.0},[{'Student': 'No'}],287257.5245,0.996801747,0.442577551,16739,9470,330121.3373
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Belgium', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],170110.0985,0.966700136,0.005758287,203,138,169304.2981
+"{'Country': 'Belgium', 'Gender': 'Male'}",[{'YearsCodingProf': '6-8 years'}],229100.3795,0.989765671,0.006096016,214,147,161884.5836
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Russian Federation', 'Age': '25 - 34 years old', 'Gender': 'Male'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],2149115.456,1,0.007885983,167,300,147188.0308
+{'Age': '35 - 44 years old'},[{'YearsCodingProf': '9-11 years'}],71590.20041,0.761122404,0.124368868,4340,3025,131443.7782
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Sweden'}",[{'Student': 'No'}],149131.0667,0.949340137,0.006788362,202,200,130116.1283
+"{'Country': 'Russian Federation', 'Age': '25 - 34 years old', 'Gender': 'Male'}",[{'WakeTime': 'Between 5:00 - 6:00 AM'}],2221608.899,1,0.008578328,181,327,117080.3614
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'LastNewJob': 'More than 4 years ago'}],251567.115,0.993469961,0.03154393,839,1029,116352.5733
+"{'Country': 'Germany', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",[{'Hobby': 'No'}],774985.7875,0.999999814,0.033941809,896,1114,106615.9435
+"{'Country': 'Russian Federation', 'Age': '25 - 34 years old'}",[{'LastNewJob': 'Less than a year ago'}],182626.7255,0.974074663,0.009355106,193,361,94067.47704
+{'Country': 'Sweden'},[{'Student': 'No'}],48711.38598,0.622516236,0.010469613,312,308,87788.96304
+"{'Country': 'Germany', 'Gender': 'Male'}","[{'LastNewJob': 'More than 4 years ago'}, {'WakeTime': 'Between 6:01 - 7:00 AM'}]",719987.6559,0.999999442,0.037285331,1006,1202,62048.71327
+{'Country': 'Pakistan'},[{'LastNewJob': 'Between 1 and 2 years ago'}],89117.65316,0.831758202,0.011161958,546,115,29940.19379
+{'Country': 'Germany'},"[{'LastNewJob': 'More than 4 years ago'}, {'WakeTime': 'Between 6:01 - 7:00 AM'}]",696316.1566,0.999999105,0.055657813,1555,1741,25651.34449
+{'Country': 'Austria'},[{'Student': 'No'}],806114.2856,0.9999999,0.006383087,171,207,21808.16476
+"{'Gender': 'Male', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'Ukraine'}",[{'LastNewJob': 'Between 1 and 2 years ago'}],465845.8103,0.999910109,0.006011584,146,210,15666.77365
+"{'Country': 'Iran, Islamic Republic of...'}","[{'Student': 'Yes, full-time'}]",20328.09978,0.334064191,0.009084922,350,188,1785.843647
+"{'Country': 'Poland', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Gender': 'Male'}",[{'YearsCodingProf': '0-2 years'}],21941.91658,0.355214987,0.012985697,311,458,-447.4967073
+{'Country': 'Philippines'},[{'LastNewJob': 'Less than a year ago'}],173097.0392,0.968631177,0.005319239,306,9,-3674.771242
+"{'Country': 'Poland', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0}",[{'YearsCodingProf': '0-2 years'}],29308.15289,0.443541708,0.013981999,335,493,-4735.790161
+"{'Country': 'Poland', 'Gender': 'Male'}",[{'YearsCodingProf': '0-2 years'}],2717.349136,0.052896579,0.013694929,330,481,-13822.80879
+{'Country': 'Mexico'},[{'LastNewJob': 'Less than a year ago'}],56688.02822,0.67817925,0.007058545,347,71,-18258.00739
+{'Country': 'Russian Federation'},[{'LastNewJob': 'Less than a year ago'}],3897.905592,0.074996828,0.024012564,652,770,-22566.73215
+{'Country': 'Poland'},[{'YearsCodingProf': '0-2 years'}],961.5624174,0.019047508,0.021851095,534,760,-23361.94942
+{'Country': 'India'},[{'LastNewJob': 'Between 2 and 4 years ago'}],79308.48258,0.795291784,0.157500127,6944,2383,-25059.07445
+{'Country': 'Israel'},[{'WakeTime': 'Between 6:01 - 7:00 AM'}],428542.8741,0.99981045,0.008730306,399,118,-26404.96597
+{'Country': 'China'},"[{'YearsCodingProf': '3-5 years'}, {'WakeTime': 'Between 6:01 - 7:00 AM'}]",6125438.299,1,0.010266975,436,172,-30252.48731
+"{'Gender': 'Male', 'Country': 'Ukraine'}",[{'YearsCodingProf': '0-2 years'}],88288.90892,0.828946376,0.00665327,161,233,-32132.84504
+"{'Country': 'United States', 'Age': '35 - 44 years old', 'Gender': 'Male'}","[{'Student': 'Yes, full-time'}]",2920887.792,1,0.037656833,1583,647,-54827.70749
+{'Country': 'United Kingdom'},[{'LastNewJob': 'Less than a year ago'}],238589.2855,0.99153475,0.066161198,2646,1272,-77291.85619
+"{'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Country': 'United Kingdom'}",[{'LastNewJob': 'Less than a year ago'}],515642.1543,0.999966796,0.044445195,1815,817,-90022.48623
+{'Country': 'Turkey'},[{'YearsCodingProf': '9-11 years'}],86859.57993,0.823985975,0.010064337,482,114,-92889.09194
+{'Country': 'Denmark'},"[{'Student': 'Yes, full-time'}]",1310626.526,1,0.006197335,185,182,-100477.3341
+{'Country': 'Finland'},[{'WakeTime': 'Between 6:01 - 7:00 AM'}],320111.9783,0.99834216,0.005353012,184,133,-136391.3312
+"{'Country': 'United Kingdom', 'Age': '18 - 24 years old', 'Gender': 'Male'}",[{'Hobby': 'No'}],4857138.999,1,0.006501292,296,89,-330901.9198
+"{'Country': 'United Kingdom', 'RaceEthnicity_WhiteorofEuropeandescent': 1.0, 'Age': '18 - 24 years old', 'Gender': 'Male'}",[{'Hobby': 'No'}],4804512.362,1,0.005910265,273,77,-381782.5215

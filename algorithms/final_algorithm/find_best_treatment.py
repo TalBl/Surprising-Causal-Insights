@@ -26,8 +26,8 @@ def find_best_treatment(df: pd.DataFrame, item_set: str, output_att: str, treatm
 
     # First layer
     for k, t in treatments.items():
-        f_res_group1, graph_dict = getTreatmentCATE(df_group1, graph, t, output_att, cols_dict, graph_dict)
-        f_res_group2, graph_dict = getTreatmentCATE(df_group2, graph, t, output_att, cols_dict, graph_dict)
+        f_res_group1 = getTreatmentCATE(df_group1, graph, t, output_att, cols_dict, graph_dict)
+        f_res_group2 = getTreatmentCATE(df_group2, graph, t, output_att, cols_dict, graph_dict)
         if not f_res_group1 or not f_res_group2:
             continue
         if is_avg_diff_positive and f_res_group1 > f_res_group2:
@@ -37,15 +37,15 @@ def find_best_treatment(df: pd.DataFrame, item_set: str, output_att: str, treatm
 
     # Find the key with the maximum absolute value in agreed_item_set
     if not agreed_treatments:
-        return None, graph_dict
+        return {"itemset": item_set, "treatment": None}
     best_treatment = max(agreed_treatments, key=lambda k: abs(agreed_treatments[k]))
 
     # Second layer
     second_layer_agreed_treatments = {}
     for t1, t2 in combinations(agreed_treatments.keys(), 2):
         t = [treatments[t1], treatments[t2]]
-        f_res_group1, x = getTreatmentCATE(df_group1, graph, t, output_att, cols_dict)
-        f_res_group2, x = getTreatmentCATE(df_group2, graph, t, output_att, cols_dict)
+        f_res_group1 = getTreatmentCATE(df_group1, graph, t, output_att, cols_dict)
+        f_res_group2 = getTreatmentCATE(df_group2, graph, t, output_att, cols_dict)
         if not f_res_group1 or not f_res_group2:
             continue
         if is_avg_diff_positive and f_res_group1 > f_res_group2:
@@ -55,5 +55,5 @@ def find_best_treatment(df: pd.DataFrame, item_set: str, output_att: str, treatm
 
     if second_layer_agreed_treatments:
         best_treatment_second_layer = max(second_layer_agreed_treatments, key=lambda k: abs(second_layer_agreed_treatments[k]))
-        return (best_treatment, graph_dict) if abs(agreed_treatments[best_treatment]) > abs(second_layer_agreed_treatments[best_treatment_second_layer]) else (best_treatment_second_layer, graph_dict)
-    return best_treatment, graph_dict
+        return {"itemset": item_set, "treatment": best_treatment} if abs(agreed_treatments[best_treatment]) > abs(second_layer_agreed_treatments[best_treatment_second_layer]) else {"itemset": item_set, "treatment": best_treatment_second_layer}
+    return {"itemset": item_set, "treatment": best_treatment}
